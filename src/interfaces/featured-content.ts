@@ -1,3 +1,3 @@
 export interface IFeaturedContent {
-    backgroundImage: string;
+    backgroundImageUrl: string;
 }
