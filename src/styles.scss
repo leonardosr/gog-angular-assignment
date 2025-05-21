@@ -2,3 +2,8 @@
 
 /* Importing Bootstrap SCSS file. */
 @import "./assets/styles/themes/gog-bootstrap-theme/bootstrap.scss";
+
+body {
+    background: $body-bg linear-gradient(180deg, rgba(108, 54, 173, 0.070) 0%, rgba(194, 194, 194, 0.0001) 100%);
+    background-repeat: no-repeat;
+}

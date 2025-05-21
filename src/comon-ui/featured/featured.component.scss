@@ -1,3 +1,24 @@
+.title {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    vertical-align: bottom;
+    text-transform: uppercase;
+}
+
 .featured-content {
-    min-height: 350px;
+    position: relative;
+    min-height: 370px;
+    background-size: cover;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .3);
+    }
 }

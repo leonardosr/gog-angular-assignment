@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IGame } from 'src/interfaces/game.interface';
+import { CatalogItemComponent } from "./catalog-item/catalog-item.component";
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CatalogItemComponent],
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent {
-
+  public readonly isLoading = input<boolean>(false);
+  public readonly items = input<IGame[] | null[]>([]);
 }

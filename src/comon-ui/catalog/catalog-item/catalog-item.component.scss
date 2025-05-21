@@ -1,0 +1,26 @@
+.catalog-item-card {
+    height: 186px;
+
+    .card-header {
+        height: 100px;
+        background-size: cover;
+    }
+
+    .card-body {
+        padding: 6px;
+
+        .item-title {
+            margin: 0 6px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: 0px;
+            text-transform: uppercase;
+
+        }
+    }
+
+    .card-footer {
+        padding: 6px;
+    }
+}

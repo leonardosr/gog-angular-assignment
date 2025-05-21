@@ -1,0 +1,11 @@
+.catalog-item {
+    width: 20%;
+
+    &:not(:first-of-type) {
+        padding-left: 1rem;
+    }
+
+    &:not(:last-of-type) {
+        padding-right: 0.75rem;
+    }
+}

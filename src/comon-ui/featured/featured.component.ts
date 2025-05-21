@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IFeaturedContent } from 'src/interfaces/featured-content';
+import { IFeaturedContent } from 'src/interfaces/featured-content.interface';
 
 @Component({
   selector: 'app-featured',
@@ -12,5 +12,6 @@ import { IFeaturedContent } from 'src/interfaces/featured-content';
 })
 export class FeaturedComponent {
   public readonly title = input<string>()
-  public readonly featuredContent = input<IFeaturedContent>()
+  public readonly isLoading = input<boolean>(false);
+  public readonly featuredContent = input<IFeaturedContent | null>()
 }

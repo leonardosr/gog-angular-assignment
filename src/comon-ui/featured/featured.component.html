@@ -1,6 +1,6 @@
 <div class="featured-content-wrapper placeholder-glow w-100">
-    <h2 class="placeholder" [class.placeholder]="!featuredContent()">{{title()}}</h2>
-    <div class="featured-content placeholder d-flex" [class.placeholder]="!featuredContent()">
-        <img [src]="featuredContent()?.backgroundImageUrl">
+    <h2 class="title">{{title()}}</h2>
+    <div class="featured-content d-flex flex-fill" [class.placeholder]="isLoading()"
+        [style.background-image]="'url(' + featuredContent()?.backgroundImageUrl">
     </div>
 </div>

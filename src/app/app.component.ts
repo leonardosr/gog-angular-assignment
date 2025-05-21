@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NavbarComponent } from "../comon-ui/navbar/navbar.component";
 import { FeaturedComponent } from "../comon-ui/featured/featured.component";
 import { CatalogComponent } from 'src/comon-ui/catalog/catalog.component';
-import { IFeaturedContent } from 'src/interfaces/featured-content';
+import { IFeaturedContent } from 'src/interfaces/featured-content.interface';
+import { AppStore, initialState } from './app.component.store';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,14 @@ import { IFeaturedContent } from 'src/interfaces/featured-content';
   styleUrls: ['./app.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NavbarComponent, FeaturedComponent, CatalogComponent]
+  imports: [NavbarComponent, FeaturedComponent, CatalogComponent],
+  providers: [AppStore]
 })
 export class AppComponent {
-  title = 'gog-assignment';
-  featuredContent: IFeaturedContent = {
-    backgroundImageUrl: 'assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.png'
+  public readonly featuredContent = toSignal(this.appStore.featuredContent$, { initialValue: initialState.featuredContent })
+  public readonly catalogItems = toSignal(this.appStore.catalogItems$, { initialValue: initialState.catalogItems })
+  public readonly isLoading = toSignal(this.appStore.isLoading$, { initialValue: initialState.isLoading })
+  constructor(public readonly appStore: AppStore) {
+
   }
 }

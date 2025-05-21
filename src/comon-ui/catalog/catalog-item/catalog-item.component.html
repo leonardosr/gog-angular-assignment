@@ -1,5 +1,13 @@
-<div class="card">
-    <div class="card-header"></div>
-    <div class="card-body"></div>
-    <div class="card-footer"></div>
+<div class="catalog-item-card card placeholder-glow">
+    <div class="card-header" [class.placeholder]="isLoading()" [style.background-image]="'url(' + item()?.thumbnail">
+    </div>
+    <div class="card-body">
+        <span class="item-title d-block" [class.placeholder]="isLoading()">{{item()?.title}}</span>
+    </div>
+    <div class="card-footer d-flex justify-content-end ">
+        @if(item()?.discount) {
+        <span class="badge text-bg-success me-1">-{{item()?.discount}}%</span>
+        }
+        <button class="btn btn-sm btn-outline-dark">${{item()?.price}}.00</button>
+    </div>
 </div>

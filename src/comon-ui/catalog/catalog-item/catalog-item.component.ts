@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { IGame } from 'src/interfaces/game.interface';
 
 @Component({
   selector: 'app-catalog-item',
@@ -9,5 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './catalog-item.component.scss'
 })
 export class CatalogItemComponent {
-
+  public readonly isLoading = input<boolean>(false);
+  public readonly item = input<IGame | null>();
 }
