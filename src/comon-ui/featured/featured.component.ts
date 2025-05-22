@@ -11,7 +11,7 @@ import { IFeaturedContent } from 'src/interfaces/featured-content.interface';
   styleUrls: ['./featured.component.scss']
 })
 export class FeaturedComponent {
-  public readonly title = input<string>()
+  public readonly featuredContentTitle = input<string>()
   public readonly isLoading = input<boolean>(false);
   public readonly featuredContent = input<IFeaturedContent | null>()
 }

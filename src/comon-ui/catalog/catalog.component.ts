@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IGame } from 'src/interfaces/game.interface';
 import { CatalogItemComponent } from "./catalog-item/catalog-item.component";
+import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
 
 @Component({
   selector: 'app-catalog',
@@ -12,5 +13,5 @@ import { CatalogItemComponent } from "./catalog-item/catalog-item.component";
 })
 export class CatalogComponent {
   public readonly isLoading = input<boolean>(false);
-  public readonly items = input<IGame[] | null[]>([]);
+  public readonly items = input<ICatalogItem[] | null[]>([]);
 }

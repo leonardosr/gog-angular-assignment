@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MiniCartComponent } from "../mini-cart/mini-cart.component";
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MiniCartComponent],
 })
 export class NavbarComponent {
 

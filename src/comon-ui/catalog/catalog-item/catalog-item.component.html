@@ -1,13 +1,38 @@
 <div class="catalog-item-card card placeholder-glow">
-    <div class="card-header" [class.placeholder]="isLoading()" [style.background-image]="'url(' + item()?.thumbnail">
+    <div class="card-header" [class.placeholder]="isLoading()"
+        [style.background-image]="'url(' + item()?.game?.thumbnail + ')'" role="img"
+        [attr.aria-label]="item()?.game?.title || 'Game cover'" [attr.title]="item()?.game?.title || 'Game cover'">
     </div>
     <div class="card-body">
-        <span class="item-title d-block" [class.placeholder]="isLoading()">{{item()?.title}}</span>
+        <span class="item-title d-block" [class.placeholder]="isLoading()" tabindex="0"
+            [attr.aria-label]="item()?.game?.title">
+            {{item()?.game?.title}}
+        </span>
     </div>
-    <div class="card-footer d-flex justify-content-end ">
-        @if(item()?.discount) {
-        <span class="badge text-bg-success me-1">-{{item()?.discount}}%</span>
+    <div class="card-footer d-flex justify-content-end">
+        @if(!item()?.isInCart && !item()?.isInLibrary) {
+        @if(item()?.game?.discount) {
+        <span class="badge text-bg-success me-1" aria-label="Discount">
+            -{{item()?.game?.discount}}%
+        </span>
         }
-        <button class="btn btn-sm btn-outline-dark">${{item()?.price}}.00</button>
+        @if(item()?.game?.price) {
+        <button class="btn btn-sm btn-outline-dark" type="button"
+            [attr.aria-label]="'Buy ' + (item()?.game?.title || '') + ' for $' + (item()?.game?.price || '')">
+            ${{item()?.game?.price}}.00
+        </button>
+        }
+        } @else {
+        @if(item()?.isInCart) {
+        <span class="badge badge-outline-dark me-1" aria-label="In Cart">
+            In Cart
+        </span>
+        }
+        @if(item()?.isInLibrary) {
+        <span class="badge badge-outline-gray me-1" aria-label="On Library">
+            Owned
+        </span>
+        }
+        }
     </div>
 </div>

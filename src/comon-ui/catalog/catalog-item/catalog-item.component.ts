@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
 import { IGame } from 'src/interfaces/game.interface';
 
 @Component({
@@ -11,5 +12,5 @@ import { IGame } from 'src/interfaces/game.interface';
 })
 export class CatalogItemComponent {
   public readonly isLoading = input<boolean>(false);
-  public readonly item = input<IGame | null>();
+  public readonly item = input<ICatalogItem | null>();
 }

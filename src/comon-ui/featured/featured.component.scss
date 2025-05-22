@@ -11,6 +11,7 @@
     position: relative;
     min-height: 370px;
     background-size: cover;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
 
     &::before {
         content: '';
@@ -20,5 +21,28 @@
         top: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, .3);
+    }
+}
+
+.secret-button,
+.secret-button:active {
+    box-shadow:
+        0px 1px 3px rgba(0, 0, 0, 0.3),
+        0px 0px 0px 1px rgba(0, 117, 77, 0.8);
+    border-radius: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    background: linear-gradient(0deg, #00905E 0%, #00C78C 100%), #000000;
+
+    &:active {
+        background: linear-gradient(0deg, #007d52 0%, #00b27d 100%), #000000;
     }
 }
