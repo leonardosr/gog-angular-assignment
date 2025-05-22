@@ -13,6 +13,24 @@
     }
 }
 
+.cart-item {
+    height: 70px;
+    border-top: 1px solid #b8b8b8;
+    border-bottom: 1px solid #b8b8b8;
+    padding: 5px;
+
+    .item-thumbnail {
+        width: 100px;
+        height: 60px;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .item-info {
+        padding: 5px;
+    }
+}
+
 .cart-link {
     text-decoration: none;
     color: var(--bs-body);
@@ -22,4 +40,15 @@
     width: 370px;
     position: absolute;
     right: 0;
+    z-index: 1050;
+}
+
+.cart-header {
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 8px;
+}
+
+.btn-clear {
+    margin-left: 8px;
 }

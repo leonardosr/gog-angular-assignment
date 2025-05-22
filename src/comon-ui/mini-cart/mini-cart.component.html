@@ -4,11 +4,23 @@
         <img class="cart-icon" src="assets/images/icons/cart.svg"><span class="cart-qty">{{cartItems().length}}</span>
     </div>
 </a>
-<div class="cart-panel bg-white">
-    <div class="cart-header">
-        <span>2 items in cart</span><button class="btn btn-primary">CLEAR CART</button>
+<div class="cart-panel bg-white flex-column" [class.d-flex]="isOpen()" [class.d-none]="!isOpen()">
+    <div class="cart-header d-flex align-items-center">
+        <span class="flex-grow-1 d-flex">
+            <span class="flex-grow-1">{{cartItems().length}} Items in cart</span>
+            <span class="flex-shrink-1">$15.97</span>
+        </span>
+        <button class="btn btn-primary btn-clear flex-shrink">CLEAR CART</button>
     </div>
-    <div class="cart-items">
-
+    <div class="cart-items d-flex flex-column">
+        @for(item of cartItems(); track item.id) {
+        <div class="cart-item d-flex align-items-center">
+            <div class="item-thumbnail" [style.background-image]="'url(' + item.game.thumbnail" role="img"></div>
+            <span class="d-flex item-info flex-grow-1">
+                <span class="item-title flex-grow-1">{{item.game.title}}</span>
+                <span class="item-price flex-shrink-1">{{item.game.price}}</span>
+            </span>
+        </div>
+        }
     </div>
 </div>
