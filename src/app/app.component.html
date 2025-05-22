@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container pt-4">
-  <app-featured class="d-flex mb-4" title="Game of the week" [featuredContent]="featuredContent()"
+  <app-featured class="d-flex mb-4" featuredContentTitle="Game of the week" [featuredContent]="featuredContent()"
     [isLoading]="isLoading()"></app-featured>
   <app-catalog [items]="catalogItems()" [isLoading]="isLoading()"></app-catalog>
 </div>
