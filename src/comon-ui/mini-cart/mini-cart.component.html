@@ -5,12 +5,14 @@
     </div>
 </a>
 <div class="cart-panel bg-white flex-column" [class.d-flex]="isOpen()" [class.d-none]="!isOpen()">
-    <div class="cart-header d-flex align-items-center">
+    @if(cartItems().length > 0) {
+    <div class="cart-header d-flex align-items-center text-dark">
         <span class="flex-grow-1 d-flex">
-            <span class="flex-grow-1">{{cartItems().length}} Items in cart</span>
-            <span class="flex-shrink-1">$15.97</span>
+            <span class="flex-grow-1">{{cartItems().length | amountPipe}} in cart</span>
+            <span class="flex-shrink-1">{{cartTotal() | currency}}</span>
         </span>
-        <button class="btn btn-primary btn-clear flex-shrink">CLEAR CART</button>
+        <button class="btn btn-lg btn-primary btn-clear flex-shrink" (click)="handleClearCartClick()">CLEAR
+            CART</button>
     </div>
     <div class="cart-items d-flex flex-column">
         @for(item of cartItems(); track item.id) {
@@ -18,9 +20,16 @@
             <div class="item-thumbnail" [style.background-image]="'url(' + item.game.thumbnail" role="img"></div>
             <span class="d-flex item-info flex-grow-1">
                 <span class="item-title flex-grow-1">{{item.game.title}}</span>
-                <span class="item-price flex-shrink-1">{{item.game.price}}</span>
+                <span class="item-price flex-shrink-1">{{item.game | finalGamePricePipe |currency
+                    }}</span>
             </span>
         </div>
         }
     </div>
+    } @else {
+    <div class="empty-cart d-flex align-content-center justify-content-center flex-wrap flex-column">
+        <img class="cart-icon align-self-center mb-2" src="assets/images/icons/cart.svg">
+        <span>Your cart is empty</span>
+    </div>
+    }
 </div>

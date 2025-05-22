@@ -16,7 +16,6 @@
 .cart-item {
     height: 70px;
     border-top: 1px solid #b8b8b8;
-    border-bottom: 1px solid #b8b8b8;
     padding: 5px;
 
     .item-thumbnail {
@@ -41,14 +40,37 @@
     position: absolute;
     right: 0;
     z-index: 1050;
+    animation: cart-fadein-up 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid #b8b8b8;
+
+    .empty-cart {
+        font-weight: 600;
+        height: 200px;
+
+        .cart-icon {
+            width: 32px;
+        }
+    }
 }
 
 .cart-header {
     font-weight: 600;
     text-transform: uppercase;
-    padding: 10px 8px;
+    padding: 8px;
 }
 
 .btn-clear {
     margin-left: 8px;
+}
+
+@keyframes cart-fadein-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

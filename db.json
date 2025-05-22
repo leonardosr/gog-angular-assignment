@@ -1,73 +1,78 @@
 {
   "games": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Oddworld: Stranger’s Wrath",
       "thumbnail": "assets/_remote-assets/game1.png",
       "discount": 50,
-      "price": 50.00
+      "price": 9.99
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Chaos on Deponia",
       "thumbnail": "assets/_remote-assets/game2.png",
       "discount": null,
-      "price": 50.00
+      "price": 4.99
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "The settlers 2: Gold Edition",
       "thumbnail": "assets/_remote-assets/game3.png",
       "discount": null,
-      "price": 50.00
+      "price": 5.99
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Neverwinter Nights",
       "thumbnail": "assets/_remote-assets/game4.png",
       "discount": null,
-      "price": 50.00
+      "price": 19.99
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Assassin’s creed: Director’s Cut",
       "thumbnail": "assets/_remote-assets/game5.png",
-      "discount": 50,
-      "price": 50.00
+      "discount": 0,
+      "price": 9.99
     }
   ],
   "library": [
     {
       "id": "1",
       "game": {
-        "id": 2,
+        "id": "2",
         "title": "Chaos on Deponia",
         "thumbnail": "assets/_remote-assets/game2.png",
         "discount": null,
-        "price": 50.00
-      }
-    },
-    {
-      "id": "1",
-      "game": {
-        "id": 4,
-        "title": "Neverwinter Nights",
-        "thumbnail": "assets/_remote-assets/game4.png",
-        "discount": null,
-        "price": 50.00
+        "price": 4.99
       }
     }
   ],
   "cart": [
     {
       "id": "1",
-      "game": {
-        "id": 3,
-        "title": "The settlers 2: Gold Edition",
-        "thumbnail": "assets/_remote-assets/game3.png",
-        "discount": null,
-        "price": 50.00
-      }
+      "items": [
+        {
+          "id": "0",
+          "game": {
+            "id": "3",
+            "title": "The settlers 2: Gold Edition",
+            "thumbnail": "assets/_remote-assets/game3.png",
+            "discount": null,
+            "price": 5.99
+          }
+        },
+        {
+          "id": "1",
+          "game": {
+            "id": "4",
+            "title": "Neverwinter Nights",
+            "thumbnail": "assets/_remote-assets/game4.png",
+            "discount": null,
+            "price": 19.99
+          }
+        }
+      ]
     }
   ]
 }

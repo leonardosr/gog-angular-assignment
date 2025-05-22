@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore } from "@ngrx/component-store";
 import { concatMap, delay, Observable, tap } from "rxjs";
-import { ICartItem } from "src/interfaces/cart-item.interface";
+import { ICart, ICartItem } from "src/interfaces/cart-item.interface";
 import { ICatalogItem } from "src/interfaces/catalog-item.interface";
 import { IFeaturedContent } from "src/interfaces/featured-content.interface";
 import { IGame } from "src/interfaces/game.interface";
 import { ILibraryItem } from "src/interfaces/library-item.interface";
-import { CART_LIST, GAME_LIST, LIBRARY_LIST, PLACEHOLDER_CATALOG_LIST } from "./app.const";
+import { PLACEHOLDER_CATALOG_LIST } from "./app.const";
 import { GameService } from "src/services/game.service";
 import { LibraryService } from "src/services/library.service";
 import { CartService } from "src/services/cart.service";
@@ -24,9 +24,9 @@ export interface AppState {
         isLoading: boolean,
         items: ILibraryItem[],
     };
-    cartItems: {
+    cart: {
         isLoading: boolean,
-        items: ICartItem[]
+        cartData: ICart | null
     };
 }
 
@@ -39,9 +39,9 @@ export const initialState: AppState = {
         isLoading: true,
         games: []
     },
-    cartItems: {
+    cart: {
         isLoading: true,
-        items: []
+        cartData: null
     },
     libraryItems: {
         isLoading: true,
@@ -65,16 +65,16 @@ export class AppStore extends ComponentStore<AppState> {
         });
     }
 
-    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cartItems, libraryItems }) => {
+    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems }) => {
         if (gameList.isLoading) return PLACEHOLDER_CATALOG_LIST;
         return gameList.games.map((game: IGame) => ({
             game,
-            isInLibrary: cartItems.items.some((cartItem: ICartItem) => cartItem.game.id === game.id),
-            isInCart: libraryItems.items.some((libraryItem: ILibraryItem) => libraryItem.game.id === game.id),
+            isInLibrary: libraryItems.items.some((cartItem: ICartItem) => cartItem.game.id === game.id),
+            isInCart: cart.cartData?.items.some((libraryItem: ILibraryItem) => libraryItem.game.id === game.id),
         }))
     });
 
-    readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cartItems.items);
+    readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cart?.cartData?.items ?? []);
 
     readonly featuredContent$: Observable<IFeaturedContent | null> = this.select(state => state.featuredContent.content);
     readonly isGameListLoading$: Observable<boolean> = this.select(state => state.gameList.isLoading);
@@ -100,11 +100,11 @@ export class AppStore extends ComponentStore<AppState> {
         };
     });
 
-    protected readonly setCart = this.updater((state, items: ICartItem[]) => {
+    protected readonly setCart = this.updater((state, cartData: ICart) => {
         return {
             ...state,
-            cartItems: {
-                items,
+            cart: {
+                cartData,
                 isLoading: false
             }
         };
@@ -130,11 +130,31 @@ export class AppStore extends ComponentStore<AppState> {
 
     public readonly loadCart = this.effect((params$) => {
         return params$.pipe(
-            concatMap(() => this.cartService.getAll()),
-            tap((items: ICartItem[]) => {
-                this.setCart(items);
+            concatMap(() => this.cartService.getById("1")),
+            tap((cartData: ICart) => {
+                this.setCart(cartData);
             })
         );
     });
+
+    public readonly clearCart = this.effect((params$) => {
+        return params$.pipe(
+            concatMap(
+                () => this.cartService.clearCart(1)
+            ),
+            tap(() => {
+                this.loadCart();
+            })
+        )
+    });
+
+    public addTocart = this.effect<{ gameId: string }>((params$) => {
+        return params$.pipe(
+            concatMap(({ gameId }) => this.cartService.addToCart("1", gameId)),
+            tap(() => {
+                this.loadCart();
+            })
+        )
+    })
 
 }

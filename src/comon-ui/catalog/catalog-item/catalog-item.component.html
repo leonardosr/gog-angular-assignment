@@ -14,24 +14,24 @@
     <div class="card-footer d-flex justify-content-end">
         @if(!item()?.isInCart && !item()?.isInLibrary) {
         @if(item()?.game?.discount) {
-        <span class="badge text-bg-success me-1" aria-label="Discount">
+        <span class="badge badge-sm text-bg-success me-1" aria-label="Discount">
             -{{item()?.game?.discount}}%
         </span>
         }
         @if(item()?.game?.price) {
-        <button class="btn btn-sm btn-outline-dark" type="button"
+        <button class="btn btn-sm btn-outline-dark" type="button" (click)="handleAddToCart(item()!.game!.id)"
             [attr.aria-label]="'Buy ' + (item()?.game?.title || '') + ' for $' + (item()?.game?.price || '')">
-            ${{item()?.game?.price}}.00
+            {{item()?.game?.price | currency }}
         </button>
         }
         } @else {
         @if(item()?.isInCart) {
-        <span class="badge badge-outline-dark" aria-label="In Cart">
+        <span class="badge badge-sm badge-outline-dark" aria-label="In Cart">
             In Cart
         </span>
         }
         @if(item()?.isInLibrary) {
-        <span class="badge badge-outline-gray" aria-label="On Library">
+        <span class="badge badge-sm badge-outline-gray" aria-label="On Library">
             Owned
         </span>
         }
