@@ -31,6 +31,20 @@ export class CartService extends ApiService<ICart> {
     );
   }
 
+  public removeFromCart(id: string, cartItemId: string): Observable<void> {
+    //Get all the carts item and patch the record. Wokaround to solve json-server limitations
+    return forkJoin({
+      cart: this.getById(id)
+    }).pipe(
+      switchMap(({ cart }) => {
+        return this.httpClient.patch<void>(`${this.apiEndpoint}/${id}`, {
+          items: cart.items.filter((item: ICartItem) => item.id !== cartItemId)
+        });
+      })
+    );
+  }
+
+
   public clearCart(id: number) {
     return this.httpClient.patch<void>(`${this.apiEndpoint}/${id}`, {
       items: []

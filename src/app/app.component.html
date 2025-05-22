@@ -1,6 +1,6 @@
 <app-navbar>
-  <app-mini-cart [isLoading]="isCartLoading()" [cartItems]="cartItems()"
-    (clearCart)="handleClearCart()"></app-mini-cart>
+  <app-mini-cart [isLoading]="isCartLoading()" [cartItems]="cartItems()" (clearCart)="handleClearCart()"
+    (removeItem)="handleRemoveItem($event)"></app-mini-cart>
 </app-navbar>
 <div class="container main-container">
   <app-featured class="d-flex mb-4" featuredContentTitle="Game of the week" [featuredContent]="featuredContent()"

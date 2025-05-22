@@ -28,6 +28,36 @@
     .item-info {
         padding: 5px;
     }
+
+    .item-title {
+        font-size: 14px;
+        font-weight: 600;
+        transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .item-price {
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    &:hover {
+        .remove-item-link {
+            display: block;
+            animation: title-fadein-up 0.2s;
+        }
+
+        .item-title {
+            opacity: 1;
+            transform: translateY(-6px);
+        }
+    }
+
+    .remove-item-link {
+        display: none;
+        color: var(--bs-body);
+        font-size: 12px;
+        transition: opacity 0.2s, transform 0.2s;
+    }
 }
 
 .cart-link {
@@ -67,6 +97,18 @@
     from {
         opacity: 0;
         transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes title-fadein-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
     }
 
     to {

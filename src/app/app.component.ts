@@ -5,11 +5,10 @@ import { FeaturedComponent } from "../comon-ui/featured/featured.component";
 import { CatalogComponent } from 'src/comon-ui/catalog/catalog.component';
 import { AppStore, initialState } from './app.component.store';
 import { GameService } from 'src/services/game.service';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LibraryService } from 'src/services/library.service';
 import { CartService } from 'src/services/cart.service';
 import { MiniCartComponent } from "../comon-ui/mini-cart/mini-cart.component";
-import { FinalGamePricePipe } from 'src/pipes/final-game-price.pipe';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,7 @@ import { FinalGamePricePipe } from 'src/pipes/final-game-price.pipe';
   styleUrls: ['./app.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NavbarComponent, FeaturedComponent, CatalogComponent, HttpClientModule, MiniCartComponent],
+  imports: [NavbarComponent, FeaturedComponent, CatalogComponent, MiniCartComponent],
   providers: [AppStore, GameService, LibraryService, CartService]
 })
 export class AppComponent implements OnInit {
@@ -39,6 +38,10 @@ export class AppComponent implements OnInit {
 
   public handleClearCart() {
     this.appStore.clearCart();
+  }
+
+  public handleRemoveItem(itemId: string) {
+    this.appStore.removeFromCart({ itemId });
   }
 
   public handleAddToCart(gameId: string) {

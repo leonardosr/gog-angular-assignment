@@ -155,6 +155,14 @@ export class AppStore extends ComponentStore<AppState> {
                 this.loadCart();
             })
         )
-    })
+    });
 
+    public removeFromCart = this.effect<{ itemId: string }>((params$) => {
+        return params$.pipe(
+            concatMap(({ itemId }) => this.cartService.removeFromCart("1", itemId)),
+            tap(() => {
+                this.loadCart();
+            })
+        )
+    });
 }

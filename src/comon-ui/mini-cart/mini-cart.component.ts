@@ -29,6 +29,7 @@ export class MiniCartComponent {
     }
   }
   @Output() clearCart = new EventEmitter<void>();
+  @Output() removeItem = new EventEmitter<string>();
   public readonly isLoading = input<boolean>(false);
   public readonly cartItems = input<ICartItem[]>([]);
   public readonly isOpen = signal<boolean>(false);
@@ -42,10 +43,15 @@ export class MiniCartComponent {
 
   public toggleCart(event: MouseEvent) {
     event.preventDefault();
-    this.isOpen.set(!this.isOpen())
+    this.isOpen.set(!this.isOpen());
   }
 
   public handleClearCartClick() {
     this.clearCart.emit();
+  }
+
+  public handleRemoveItem(event: MouseEvent, cartItemId: string) {
+    event.preventDefault();
+    this.removeItem.emit(cartItemId);
   }
 }

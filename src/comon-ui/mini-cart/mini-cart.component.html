@@ -1,34 +1,51 @@
-<a class="cart-link" href="#" (click)="toggleCart($event)">
+<a class="cart-link" href="#" (click)="toggleCart($event)" aria-label="Open cart" aria-haspopup="dialog"
+    [attr.aria-expanded]="isOpen()" tabindex="0">
     <div class="cart bg-white d-flex flex-wrap align-content-center justify-content-center placeholder-glow"
-        [class.placeholder]="isLoading()">
-        <img class="cart-icon" src="assets/images/icons/cart.svg"><span class="cart-qty">{{cartItems().length}}</span>
+        [class.placeholder]="isLoading()" role="button" [attr.aria-label]="'Cart with' + cartItems().length + 'items'">
+        <img class="cart-icon" src="assets/images/icons/cart.svg" alt="Cart icon" />
+        <span class="cart-qty" aria-live="polite">{{cartItems().length}}</span>
     </div>
 </a>
-<div class="cart-panel bg-white flex-column" [class.d-flex]="isOpen()" [class.d-none]="!isOpen()">
+<div class="cart-panel bg-white flex-column" [class.d-flex]="isOpen()" [class.d-none]="!isOpen()" role="dialog"
+    aria-modal="true" aria-label="Shopping cart" tabindex="-1">
     @if(cartItems().length > 0) {
     <div class="cart-header d-flex align-items-center text-dark">
         <span class="flex-grow-1 d-flex">
-            <span class="flex-grow-1">{{cartItems().length | amountPipe}} in cart</span>
+            <span class="flex-grow-1" id="cart-summary">
+                {{cartItems().length | amountPipe:'game':'games'}} in cart
+            </span>
             <span class="flex-shrink-1">{{cartTotal() | currency}}</span>
         </span>
-        <button class="btn btn-lg btn-primary btn-clear flex-shrink" (click)="handleClearCartClick()">CLEAR
-            CART</button>
+        <button class="btn btn-lg btn-primary btn-clear flex-shrink" (click)="handleClearCartClick()"
+            aria-label="Clear cart">
+            CLEAR CART
+        </button>
     </div>
-    <div class="cart-items d-flex flex-column">
+    <div class="cart-items d-flex flex-column" role="list" aria-labelledby="cart-summary">
         @for(item of cartItems(); track item.id) {
-        <div class="cart-item d-flex align-items-center">
-            <div class="item-thumbnail" [style.background-image]="'url(' + item.game.thumbnail" role="img"></div>
-            <span class="d-flex item-info flex-grow-1">
-                <span class="item-title flex-grow-1">{{item.game.title}}</span>
-                <span class="item-price flex-shrink-1">{{item.game | finalGamePricePipe |currency
-                    }}</span>
+        <div class="cart-item d-flex align-items-center" role="listitem">
+            <div class="item-thumbnail" [style.background-image]="'url(' + item.game.thumbnail" role="img"
+                [attr.aria-label]="item.game.title + ' cover'" [attr.title]="item.game.title"></div>
+            <span class="d-flex item-info flex-column flex-grow-1">
+                <div class="d-flex w-100">
+                    <span class="item-title flex-grow-1">
+                        {{item.game.title}}
+                        <a class="remove-item-link" href="#" (click)="handleRemoveItem($event, item.id)"
+                            [attr.aria-label]="'Remove' + item.game.title + 'from cart'" tabindex="0" role="button">
+                            Remove
+                        </a>
+                    </span>
+                    <span class="item-price flex-shrink-1 align-content-center">
+                        {{item.game | finalGamePricePipe | currency}}
+                    </span>
+                </div>
             </span>
         </div>
         }
     </div>
     } @else {
-    <div class="empty-cart d-flex align-content-center justify-content-center flex-wrap flex-column">
-        <img class="cart-icon align-self-center mb-2" src="assets/images/icons/cart.svg">
+    <div class="empty-cart d-flex align-content-center justify-content-center flex-wrap flex-column" aria-live="polite">
+        <img class="cart-icon align-self-center mb-2" src="assets/images/icons/cart.svg" alt="Empty cart" />
         <span>Your cart is empty</span>
     </div>
     }
