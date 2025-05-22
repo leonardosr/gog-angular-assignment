@@ -62,9 +62,9 @@
     {
       "id": "1",
       "game": {
-        "id": 4,
-        "title": "Neverwinter Nights",
-        "thumbnail": "assets/_remote-assets/game4.png",
+        "id": 3,
+        "title": "The settlers 2: Gold Edition",
+        "thumbnail": "assets/_remote-assets/game3.png",
         "discount": null,
         "price": 50.00
       }

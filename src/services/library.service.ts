@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IGame } from 'src/interfaces/game.interface';
 import { ILibraryItem } from 'src/interfaces/library-item.interface';
+import { ReadonlyService } from './crud.service';
+import { API_URLS } from 'src/constants/api-endpoints.const';
+
+const API_ENDPOINT = API_URLS.library;
 
 @Injectable()
-export class LibraryService {
+export class LibraryService extends ReadonlyService<ILibraryItem> {
 
-  constructor(protected readonly httpClient: HttpClient) { }
-  public getAll(): Observable<ILibraryItem[]> {
-    return this.httpClient.get<ILibraryItem[]>('http://localhost:3000/library');
+  constructor(httpClient: HttpClient) {
+    super(httpClient, API_ENDPOINT);
   }
 }

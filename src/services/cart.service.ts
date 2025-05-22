@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ICartItem } from 'src/interfaces/cart-item.interface';
+import { ReadonlyService } from './crud.service';
+import { API_URLS } from 'src/constants/api-endpoints.const';
+
+const API_ENDPOINT = API_URLS.cart;
 
 @Injectable()
-export class CartService {
+export class CartService extends ReadonlyService<ICartItem> {
 
-  constructor(public httpClient: HttpClient) { }
-
-  public getAll(): Observable<ICartItem[]> {
-    return this.httpClient.get<ICartItem[]>('http://localhost:3000/cart');
+  constructor(httpClient: HttpClient) {
+    super(httpClient, API_ENDPOINT);
   }
 }

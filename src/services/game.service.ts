@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { IGame } from 'src/interfaces/game.interface';
+import { ReadonlyService } from './crud.service';
+import { API_URLS } from 'src/constants/api-endpoints.const';
+
+const API_ENDPOINT = API_URLS.games;
 
 @Injectable()
-export class GameService {
+export class GameService extends ReadonlyService<IGame> {
 
-  constructor(protected readonly httpClient: HttpClient) { }
-  public getAll(): Observable<IGame[]> {
-    return this.httpClient.get<IGame[]>('http://localhost:3000/games');
+  constructor(httpClient: HttpClient) {
+    super(httpClient, API_ENDPOINT);
   }
 }

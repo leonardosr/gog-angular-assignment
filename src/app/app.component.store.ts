@@ -25,7 +25,7 @@ export interface AppState {
         items: ILibraryItem[],
     };
     cartItems: {
-        isLoading: true,
+        isLoading: boolean,
         items: ICartItem[]
     };
 }
@@ -51,7 +51,6 @@ export const initialState: AppState = {
 
 @Injectable()
 export class AppStore extends ComponentStore<AppState> {
-
     constructor(protected readonly gameService: GameService, protected readonly libraryService: LibraryService, protected readonly cartService: CartService) {
         super(initialState);
         setTimeout(() => {
@@ -98,6 +97,16 @@ export class AppStore extends ComponentStore<AppState> {
         };
     });
 
+    protected readonly setCart = this.updater((state, items: ICartItem[]) => {
+        return {
+            ...state,
+            cartItems: {
+                items,
+                isLoading: false
+            }
+        };
+    });
+
     public readonly loadGames = this.effect((params$) => {
         return params$.pipe(
             concatMap(() => this.gameService.getAll()),
@@ -120,7 +129,7 @@ export class AppStore extends ComponentStore<AppState> {
         return params$.pipe(
             concatMap(() => this.cartService.getAll()),
             tap((items: ICartItem[]) => {
-                this.setLibrary(items);
+                this.setCart(items);
             })
         );
     });
