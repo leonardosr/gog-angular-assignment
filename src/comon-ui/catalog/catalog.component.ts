@@ -13,5 +13,5 @@ import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
 })
 export class CatalogComponent {
   public readonly isLoading = input<boolean>(false);
-  public readonly items = input<ICatalogItem[] | null[]>([]);
+  public readonly items = input<(ICatalogItem | null)[]>([]);
 }

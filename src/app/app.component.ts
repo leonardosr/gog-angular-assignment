@@ -17,7 +17,7 @@ import { AppStore, initialState } from './app.component.store';
 })
 export class AppComponent {
   public readonly featuredContent = toSignal(this.appStore.featuredContent$, { initialValue: initialState.featuredContent })
-  public readonly catalogItems = toSignal(this.appStore.catalogItems$, { initialValue: initialState.catalogItems })
+  public readonly catalogItems = toSignal(this.appStore.catalogItems$, { initialValue: [null, null, null, null, null] })
   public readonly isLoading = toSignal(this.appStore.isLoading$, { initialValue: initialState.isLoading })
   constructor(public readonly appStore: AppStore) {
 
