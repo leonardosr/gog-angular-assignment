@@ -55,16 +55,6 @@
         {
           "id": "0",
           "game": {
-            "id": "1",
-            "title": "Oddworld: Stranger’s Wrath",
-            "thumbnail": "assets/_remote-assets/game1.png",
-            "discount": 50,
-            "price": 9.99
-          }
-        },
-        {
-          "id": "1",
-          "game": {
             "id": "3",
             "title": "The settlers 2: Gold Edition",
             "thumbnail": "assets/_remote-assets/game3.png",
@@ -73,23 +63,13 @@
           }
         },
         {
-          "id": "2",
+          "id": "1",
           "game": {
             "id": "4",
             "title": "Neverwinter Nights",
             "thumbnail": "assets/_remote-assets/game4.png",
             "discount": null,
             "price": 19.99
-          }
-        },
-        {
-          "id": "3",
-          "game": {
-            "id": "5",
-            "title": "Assassin’s creed: Director’s Cut",
-            "thumbnail": "assets/_remote-assets/game5.png",
-            "discount": 0,
-            "price": 9.99
           }
         }
       ]

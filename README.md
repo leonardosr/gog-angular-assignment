@@ -1,27 +1,124 @@
-# GogAssignment
+# GoG Cart Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
+This is a sample shopping cart application built with Angular (v18) as part of a Senior Front End Developer assignment for GoG.  
+It demonstrates modern Angular features, accessibility, state management, and a modular component structure.
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisites
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Angular CLI](https://angular.io/cli) (optional, for local development)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Installation
 
-## Build
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/leonardosr/gog-cart-assignment.git
+    cd gog-cart-assignment
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. **Install dependencies:**
+    ```sh
+    npm install
+    ```
 
-## Running unit tests
+3. **Install `json-server` globally (if not already):**
+    ```sh
+    npm install -g json-server
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Running the Application
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 1. Start the Mock API with `json-server`
 
-## Further help
+The app uses [json-server](https://github.com/typicode/json-server) to mock backend API calls.  
+A sample `db.json` file is provided in the project root.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```sh
+json-server --watch db.json --port 3000
+```
+or
+```sh
+npm run json-server
+```
+
+- The API will be available at `http://localhost:3000/`.
+- You can edit `db.json` to change the product catalog or cart data.
+
+### 2. Start the Angular Application
+
+In a new terminal window/tab:
+
+```sh
+npm start
+```
+or
+```sh
+ng serve
+```
+
+- The app will be available at `http://localhost:4200/`.
+
+---
+
+## Running Tests
+
+```sh
+npm test
+```
+or
+```sh
+ng test
+```
+
+---
+
+## Project Structure
+
+```
+src/
+  app/
+    app.component.ts
+    app.component.store.ts
+    app.const.ts
+    ...
+  comon-ui/
+    navbar/
+    mini-cart/
+    catalog/
+    featured/
+  interfaces/
+  pipes/
+  assets/
+    styles/
+      themes/
+        gog-bootstrap-theme/
+          overrides/
+  db.json
+```
+
+---
+
+## Notes
+
+- The application uses Angular signals and standalone components (Angular 18).
+- State management is handled with `@ngrx/component-store`.
+- Styling uses Bootstrap 5 with custom theme overrides.
+- The mock API (`json-server`) is required for full functionality.
+
+---
+
+## License
+
+This project is for assignment/demo purposes only.
+
+---
+
+## Author
+
+Leonardo Salomão dos Reis
+leo.salomao.reis@gmail.com
