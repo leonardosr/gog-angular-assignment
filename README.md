@@ -48,6 +48,7 @@ npm run json-server
 
 - The API will be available at `http://localhost:3000/`.
 - You can edit `db.json` to change the product catalog or cart data.
+- You can use the `db_bkp.json` file to restore the initial data.
 
 ### 2. Start the Angular Application
 
