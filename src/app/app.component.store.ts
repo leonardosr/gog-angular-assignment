@@ -1,56 +1,128 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore } from "@ngrx/component-store";
-import { Observable } from "rxjs";
+import { concatMap, delay, Observable, tap } from "rxjs";
 import { ICartItem } from "src/interfaces/cart-item.interface";
 import { ICatalogItem } from "src/interfaces/catalog-item.interface";
 import { IFeaturedContent } from "src/interfaces/featured-content.interface";
 import { IGame } from "src/interfaces/game.interface";
 import { ILibraryItem } from "src/interfaces/library-item.interface";
 import { CART_LIST, GAME_LIST, LIBRARY_LIST, PLACEHOLDER_CATALOG_LIST } from "./app.const";
+import { GameService } from "src/services/game.service";
+import { LibraryService } from "src/services/library.service";
+import { CartService } from "src/services/cart.service";
 
 export interface AppState {
-    featuredContent: IFeaturedContent | null;
-    gameList: IGame[];
-    libraryItems: ILibraryItem[];
-    cartItems: ICartItem[];
-    isLoading: boolean;
+    featuredContent: {
+        isLoading: boolean,
+        content: IFeaturedContent | null
+    };
+    gameList: {
+        isLoading: boolean,
+        games: IGame[],
+    };
+    libraryItems: {
+        isLoading: boolean,
+        items: ILibraryItem[],
+    };
+    cartItems: {
+        isLoading: true,
+        items: ICartItem[]
+    };
 }
 
 export const initialState: AppState = {
-    featuredContent: null,
-    gameList: [],
-    cartItems: [],
-    libraryItems: [],
-    isLoading: true
+    featuredContent: {
+        isLoading: true,
+        content: null
+    },
+    gameList: {
+        isLoading: true,
+        games: []
+    },
+    cartItems: {
+        isLoading: true,
+        items: []
+    },
+    libraryItems: {
+        isLoading: true,
+        items: []
+    },
 }
 
 @Injectable()
 export class AppStore extends ComponentStore<AppState> {
 
-    constructor() {
+    constructor(protected readonly gameService: GameService, protected readonly libraryService: LibraryService, protected readonly cartService: CartService) {
         super(initialState);
         setTimeout(() => {
             this.patchState({
-                isLoading: false,
                 featuredContent: {
-                    backgroundImageUrl: 'assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.png'
+                    isLoading: false,
+                    content: {
+                        backgroundImageUrl: 'assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.png'
+                    }
                 },
-                gameList: GAME_LIST,
-                cartItems: CART_LIST,
-                libraryItems: LIBRARY_LIST
             });
         }, 1000);
     }
 
-    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cartItems, libraryItems, isLoading }) => {
-        if (isLoading) return PLACEHOLDER_CATALOG_LIST;
-        return gameList.map((game: IGame) => ({
+    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cartItems, libraryItems }) => {
+        if (gameList.isLoading) return PLACEHOLDER_CATALOG_LIST;
+        return gameList.games.map((game: IGame) => ({
             game,
-            isInLibrary: cartItems.some((cartItem: ICartItem) => cartItem.game.id === game.id),
-            isInCart: libraryItems.some((libraryItem: ILibraryItem) => libraryItem.game.id === game.id),
+            isInLibrary: cartItems.items.some((cartItem: ICartItem) => cartItem.game.id === game.id),
+            isInCart: libraryItems.items.some((libraryItem: ILibraryItem) => libraryItem.game.id === game.id),
         }))
     });
-    readonly featuredContent$: Observable<IFeaturedContent | null> = this.select(state => state.featuredContent);
-    readonly isLoading$: Observable<boolean> = this.select(state => state.isLoading);
+    readonly featuredContent$: Observable<IFeaturedContent | null> = this.select(state => state.featuredContent.content);
+    readonly isGameListLoading$: Observable<boolean> = this.select(state => state.gameList.isLoading);
+    readonly isFetauredContentLoading$: Observable<boolean> = this.select(state => state.featuredContent.isLoading);
+
+    protected readonly setGames = this.updater((state, games: IGame[]) => {
+        return {
+            ...state,
+            gameList: {
+                games,
+                isLoading: false
+            }
+        };
+    });
+
+    protected readonly setLibrary = this.updater((state, items: ILibraryItem[]) => {
+        return {
+            ...state,
+            libraryItems: {
+                items,
+                isLoading: false
+            }
+        };
+    });
+
+    public readonly loadGames = this.effect((params$) => {
+        return params$.pipe(
+            concatMap(() => this.gameService.getAll()),
+            tap((games: IGame[]) => {
+                this.setGames(games);
+            })
+        );
+    });
+
+    public readonly loadUserLibrary = this.effect((params$) => {
+        return params$.pipe(
+            concatMap(() => this.libraryService.getAll()),
+            tap((items: ILibraryItem[]) => {
+                this.setLibrary(items);
+            })
+        );
+    });
+
+    public readonly loadCart = this.effect((params$) => {
+        return params$.pipe(
+            concatMap(() => this.cartService.getAll()),
+            tap((items: ICartItem[]) => {
+                this.setLibrary(items);
+            })
+        );
+    });
 
 }
