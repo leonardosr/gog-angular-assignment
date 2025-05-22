@@ -62,7 +62,7 @@ export class AppStore extends ComponentStore<AppState> {
                     }
                 },
             });
-        }, 1000);
+        });
     }
 
     readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cartItems, libraryItems }) => {
@@ -73,6 +73,9 @@ export class AppStore extends ComponentStore<AppState> {
             isInCart: libraryItems.items.some((libraryItem: ILibraryItem) => libraryItem.game.id === game.id),
         }))
     });
+
+    readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cartItems.items);
+
     readonly featuredContent$: Observable<IFeaturedContent | null> = this.select(state => state.featuredContent.content);
     readonly isGameListLoading$: Observable<boolean> = this.select(state => state.gameList.isLoading);
     readonly isFetauredContentLoading$: Observable<boolean> = this.select(state => state.featuredContent.isLoading);

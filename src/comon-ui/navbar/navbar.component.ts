@@ -6,8 +6,7 @@ import { MiniCartComponent } from "../mini-cart/mini-cart.component";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MiniCartComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
 

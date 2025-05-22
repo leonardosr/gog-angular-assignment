@@ -1,3 +1,14 @@
-<div class="cart bg-white d-flex flex-wrap align-content-center justify-content-center">
-    <img class="cart-icon" src="assets/images/icons/cart.svg"><span class="cart-qty">2</span>
+<a class="cart-link" href="#" (click)="toggleCart($event)">
+    <div class="cart bg-white d-flex flex-wrap align-content-center justify-content-center placeholder-glow"
+        [class.placeholder]="isLoading()">
+        <img class="cart-icon" src="assets/images/icons/cart.svg"><span class="cart-qty">{{cartItems().length}}</span>
+    </div>
+</a>
+<div class="cart-panel bg-white">
+    <div class="cart-header">
+        <span>2 items in cart</span><button class="btn btn-primary">CLEAR CART</button>
+    </div>
+    <div class="cart-items">
+
+    </div>
 </div>
