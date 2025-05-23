@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ICart, ICartItem } from 'src/interfaces/cart-item.interface';
 import { ApiService } from './api.service';
 import { API_URLS } from 'src/constants/api-endpoints.const';
-import { forkJoin, Observable, switchMap } from 'rxjs';
+import { forkJoin, Observable, of, switchMap } from 'rxjs';
 import { IGame } from 'src/interfaces/game.interface';
 
 const API_ENDPOINT = API_URLS.cart;
@@ -14,19 +14,23 @@ export class CartService extends ApiService<ICart> {
     super(httpClient, API_ENDPOINT);
   }
 
-  public addToCart(id: string, gameId: string): Observable<void> {
+  public addToCart(id: string, gameId: string): Observable<ICartItem> {
     //Get all the carts item and patch the record. Wokaround to solve json-server limitations
     return forkJoin({
       cart: this.getById(id),
       game: this.httpClient.get<IGame>(`${API_URLS.games}/${gameId}`)
     }).pipe(
       switchMap(({ cart, game }) => {
+        const newCartItem = {
+          id: cart.items.length.toString(),
+          game
+        };
         return this.httpClient.patch<void>(`${this.apiEndpoint}/${id}`, {
-          items: [...cart.items.filter((item: ICartItem) => item.game.id !== gameId), {
-            id: cart.items.length.toString(),
-            game
-          }]
-        });
+          items: [...cart.items.filter((item: ICartItem) => item.game.id !== gameId), newCartItem]
+        }).pipe(
+          //simulates a response form the server
+          switchMap(() => of(newCartItem))
+        );
       })
     );
   }

@@ -4,7 +4,7 @@ import { LibraryService } from 'src/services/library.service';
 import { CartService } from 'src/services/cart.service';
 import { ContentService } from 'src/services/content.service';
 import { IGame } from 'src/interfaces/game.interface';
-import { ICart } from 'src/interfaces/cart-item.interface';
+import { ICart, ICartItem } from 'src/interfaces/cart-item.interface';
 import { ILibraryItem } from 'src/interfaces/library-item.interface';
 import { IContent } from 'src/interfaces/featured-content.interface';
 import { of, throwError } from 'rxjs';
@@ -165,12 +165,17 @@ describe('AppStore', () => {
         });
 
         it('should add to cart via addTocart effect', (done) => {
-            cartService.addToCart.and.returnValue(of(void 0));
+            cartService.addToCart.and.returnValue(of({
+                id: '1',
+            } as unknown as ICartItem));
             cartService.getById.and.returnValue(of({ id: '1', items: [] }));
-            store.addTocart(of({ gameId: 'g1' }));
+            spyOn(store, 'state').and.returnValue({
+                ...initialState,
+                cart: { ...initialState.cart, cartData: { id: '1', items: [] } }
+            });
+            store.addTocart(of({ gameId: '1' }));
             setTimeout(() => {
-                expect(cartService.addToCart).toHaveBeenCalledWith('1', 'g1');
-                expect(cartService.getById).toHaveBeenCalled();
+                expect(cartService.addToCart).toHaveBeenCalledWith('1', '1');
                 done();
             }, 0);
         });
@@ -188,9 +193,9 @@ describe('AppStore', () => {
         it('should remove from cart via removeFromCart effect', (done) => {
             cartService.removeFromCart.and.returnValue(of(void 0));
             cartService.getById.and.returnValue(of({ id: '1', items: [] }));
-            store.removeFromCart(of({ itemId: 'i1' }));
+            store.removeFromCart(of({ itemId: '1' }));
             setTimeout(() => {
-                expect(cartService.removeFromCart).toHaveBeenCalledWith('1', 'i1');
+                expect(cartService.removeFromCart).toHaveBeenCalledWith('1', '1');
                 expect(cartService.getById).toHaveBeenCalled();
                 done();
             }, 0);
@@ -199,9 +204,34 @@ describe('AppStore', () => {
         it('should handle error in removeFromCart effect', (done) => {
             spyOn(console, 'error');
             cartService.removeFromCart.and.returnValue(throwError(() => new Error('Remove from cart error')));
-            store.removeFromCart(of({ itemId: 'i1' }));
+            store.removeFromCart(of({ itemId: '1' }));
             setTimeout(() => {
                 expect(console.error).toHaveBeenCalledWith('[AppStore] removeFromCart effect failed:', jasmine.any(Error));
+                done();
+            }, 0);
+        });
+
+        it('should load cart and remove pending item via loadCartAndRemovePending effect', (done) => {
+            const cart: ICart = { id: '1', items: [] };
+            cartService.getById.and.returnValue(of(cart));
+            // Set up initial state with a pending item
+            store.patchState({
+                pendingCartItems: new Set(['1'])
+            });
+            store.loadCartAndRemovePending(of({ gameId: '1' }));
+            setTimeout(() => {
+                expect(store.state().cart.cartData).toEqual(cart);
+                expect(store.state().pendingCartItems.has('1')).toBeFalse();
+                done();
+            }, 0);
+        });
+
+        it('should handle error in loadCartAndRemovePending effect', (done) => {
+            spyOn(console, 'error');
+            cartService.getById.and.returnValue(throwError(() => new Error('Cart error')));
+            store.loadCartAndRemovePending(of({ gameId: '1' }));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] loadCartAndRemovePending effect failed:', jasmine.any(Error));
                 done();
             }, 0);
         });

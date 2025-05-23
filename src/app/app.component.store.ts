@@ -123,6 +123,15 @@ export class AppStore extends ComponentStore<AppState> {
         };
     });
 
+    protected readonly removePendingCartItem = this.updater((state, gameId: string) => {
+        const newPending = new Set(state.pendingCartItems);
+        newPending.delete(gameId);
+        return {
+            ...state,
+            pendingCartItems: newPending
+        };
+    });
+
     public readonly loadGames = this.effect((params$) => {
         return params$.pipe(
             concatMap(() => this.gameService.getAll()),
@@ -164,6 +173,24 @@ export class AppStore extends ComponentStore<AppState> {
         );
     });
 
+    public readonly loadCartAndRemovePending = this.effect<{ gameId: string }>((params$) => {
+        return params$.pipe(
+            concatMap(({ gameId }) =>
+                this.cartService.getById('1').pipe(
+                    tap((cartData: ICart) => {
+                        this.setCart(cartData);
+                        this.removePendingCartItem(gameId);
+                    }),
+                    catchError(err => {
+                        console.error('[AppStore] loadCartAndRemovePending effect failed:', err);
+                        return EMPTY;
+                    })
+                )
+            )
+        );
+    });
+
+
     public readonly loadFeaturedContent = this.effect((params$) => {
         return params$.pipe(
             concatMap(() => this.contentService.getById('1')),
@@ -196,8 +223,10 @@ export class AppStore extends ComponentStore<AppState> {
         return params$.pipe(
             tap(({ gameId }) => this.addPendingCartItem(gameId)),
             concatMap(({ gameId }) => this.cartService.addToCart('1', gameId)),
-            tap(() => {
-                this.loadCart();
+            tap(({ game }) => {
+                this.loadCartAndRemovePending({
+                    gameId: game.id
+                });
             }),
             catchError(err => {
                 console.error('[AppStore] addTocart effect failed:', err);
