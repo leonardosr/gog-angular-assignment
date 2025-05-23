@@ -1,6 +1,6 @@
 <div class="d-flex flex-wrap">
     @for (item of items(); track $index) {
-    <app-catalog-item class="catalog-item flex-fill mb-4" [item]="item" [isLoading]="isLoading()"
+    <app-catalog-item class="catalog-item d-fkex mb-2" [item]="item" [isLoading]="isLoading()"
         (addToCart)="addToCart.emit($event)"></app-catalog-item>
     }
 </div>

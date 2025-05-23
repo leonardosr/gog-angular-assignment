@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IContent } from 'src/interfaces/featured-content.interface';
 
 @Component({
   selector: 'app-featured',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './featured.component.html',
   styleUrls: ['./featured.component.scss']
 })

@@ -1,11 +1,59 @@
-.catalog-item {
-    width: 20%;
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/mixins';
+@import 'src/assets/styles/themes/gog-bootstrap-theme/variables';
 
-    &:not(:first-of-type) {
-        padding-left: 1rem;
+$breakpoint-xs: map-get($grid-breakpoints, xs);
+$breakpoint-sm: map-get($grid-breakpoints, sm);
+$breakpoint-lg: map-get($grid-breakpoints, lg);
+$breakpoint-xl: map-get($grid-breakpoints, xl);
+
+.catalog-item {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    margin-bottom: 1.25rem;
+
+    &:nth-child(2n + 1) {
+        padding-right: 0.25rem;
+        padding-left: 0;
     }
 
-    &:not(:last-of-type) {
-        padding-right: 0.75rem;
+    &:nth-child(2n) {
+        padding-left: 0.25rem;
+        padding-right: 0;
+    }
+}
+
+@media (min-width: $breakpoint-lg) {
+    .catalog-item {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: $breakpoint-xl) {
+    .catalog-item {
+        width: 20%;
+        float: left;
+        box-sizing: border-box;
+        margin-bottom: 2rem;
+
+        &:nth-child(2n + 1) {
+            padding-right: 0;
+        }
+
+        &:nth-child(2n) {
+            padding-right: 0;
+        }
+
+        &:not(:first-of-type) {
+            padding-left: 0.75rem;
+        }
+
+        &:not(:last-of-type) {
+            padding-right: 0.75rem;
+        }
     }
 }

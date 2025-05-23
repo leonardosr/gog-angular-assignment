@@ -1,3 +1,7 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/mixins';
+@import 'src/assets/styles/themes/gog-bootstrap-theme/variables';
+
 :host {
     position: relative;
 }
@@ -40,24 +44,12 @@
         font-size: 13px;
     }
 
-    &:hover {
-        .remove-item-link {
-            display: block;
-            animation: title-fadein-up 0.2s;
-        }
-
-        .item-title {
-            opacity: 1;
-            transform: translateY(-6px);
-        }
-    }
-
     .remove-item-link {
-        display: none;
         color: var(--bs-body);
         font-size: 12px;
         padding: 4px 0;
         transition: opacity 0.2s, transform 0.2s;
+        width: 0;
     }
 }
 
@@ -67,8 +59,13 @@
 }
 
 .cart-panel {
-    width: 370px;
-    position: absolute;
+    background-color: var(--bs-white);
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: auto;
+    bottom: 0;
+    top: 59px;
     right: 0;
     z-index: 1050;
     animation: cart-fadein-up 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -115,5 +112,38 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .remove-item-link {
+        display: block;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .remove-item-link {
+        display: none;
+    }
+
+    .cart-panel {
+        width: 370px;
+        position: absolute;
+        left: auto;
+        bottom: auto;
+    }
+
+    .cart-item {
+        &:hover {
+            .remove-item-link {
+                display: flex;
+                animation: title-fadein-up 0.2s;
+            }
+
+            .item-title {
+                opacity: 1;
+                transform: translateY(-6px);
+            }
+        }
     }
 }

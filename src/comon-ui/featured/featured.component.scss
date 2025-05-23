@@ -1,3 +1,12 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/mixins';
+@import 'src/assets/styles/themes/gog-bootstrap-theme/variables';
+
+$breakpoint-xs: map-get($grid-breakpoints, xs);
+$breakpoint-sm: map-get($grid-breakpoints, sm);
+$breakpoint-lg: map-get($grid-breakpoints, lg);
+$breakpoint-xl: map-get($grid-breakpoints, xl);
+
 .title {
     font-weight: 700;
     font-size: 15px;
@@ -8,10 +17,12 @@
 }
 
 .featured-content {
+    height: 160px;
     position: relative;
-    min-height: 370px;
     background-size: cover;
+    background-position: center center;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
 
     &::before {
         content: '';
@@ -29,5 +40,24 @@
         z-index: 1000;
         top: 50%;
         transform: translateY(-50%);
+    }
+}
+
+@media (min-width: $breakpoint-sm) {
+    .featured-content {
+        height: 250px;
+    }
+}
+
+@media (min-width: $breakpoint-xl) {
+    .featured-content {
+        height: 250px;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: $breakpoint-xl) {
+    .featured-content {
+        height: 370px;
     }
 }

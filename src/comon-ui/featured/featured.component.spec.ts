@@ -34,4 +34,11 @@ describe('FeaturedComponent', () => {
     const content = fixture.debugElement.query(By.css('.featured-content'));
     expect(content.styles['background-image']).toContain('test.jpg');
   });
+
+  it('should render the secret button but keep it invisible', () => {
+    const secretBtn = fixture.nativeElement.querySelector('.secret-btn');
+    expect(secretBtn).toBeTruthy();
+    const style = getComputedStyle(secretBtn);
+    expect(style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0').toBeTrue();
+  });
 });
