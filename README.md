@@ -6,10 +6,10 @@ It demonstrates modern Angular features, accessibility, state management, and a 
 ## Features
 
 - Modern Angular 18 with standalone components and signals
-- Responsive design using Bootstrap 5 and custom theming
-- Modular state management with @ngrx/component-store
-- Mock API with json-server for local development
-- Unit tests for components, pipes, and store logic
+- Responsive design (Bootstrap 5)
+- Modular state management (@ngrx/component-store)
+- Mock API with json-server
+- Unit tests for all major logic
 
 ## Getting Started
 
@@ -74,17 +74,11 @@ ng serve
 
 ---
 
-## Running Tests
+## Testing
 
-```sh
-npm test
-```
-or
-```sh
-ng test
-```
-
----
+- Run all unit tests: `npm test`
+- Coverage reports are generated in `/coverage`
+- Tests cover components, pipes, store logic, and utility functions
 
 ## Project Structure
 
