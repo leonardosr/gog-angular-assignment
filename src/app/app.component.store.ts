@@ -3,18 +3,19 @@ import { ComponentStore } from "@ngrx/component-store";
 import { concatMap, delay, Observable, tap } from "rxjs";
 import { ICart, ICartItem } from "src/interfaces/cart-item.interface";
 import { ICatalogItem } from "src/interfaces/catalog-item.interface";
-import { IFeaturedContent } from "src/interfaces/featured-content.interface";
+import { IContent } from "src/interfaces/featured-content.interface";
 import { IGame } from "src/interfaces/game.interface";
 import { ILibraryItem } from "src/interfaces/library-item.interface";
 import { PLACEHOLDER_CATALOG_LIST } from "./app.const";
 import { GameService } from "src/services/game.service";
 import { LibraryService } from "src/services/library.service";
 import { CartService } from "src/services/cart.service";
+import { ContentService } from "src/services/content.service";
 
 export interface AppState {
     featuredContent: {
         isLoading: boolean,
-        content: IFeaturedContent | null
+        content: IContent | null
     };
     gameList: {
         isLoading: boolean,
@@ -51,18 +52,12 @@ export const initialState: AppState = {
 
 @Injectable()
 export class AppStore extends ComponentStore<AppState> {
-    constructor(protected readonly gameService: GameService, protected readonly libraryService: LibraryService, protected readonly cartService: CartService) {
+    constructor(
+        protected readonly gameService: GameService,
+        protected readonly libraryService: LibraryService,
+        protected readonly cartService: CartService,
+        protected readonly contentService: ContentService) {
         super(initialState);
-        setTimeout(() => {
-            this.patchState({
-                featuredContent: {
-                    isLoading: false,
-                    content: {
-                        backgroundImageUrl: 'assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.webp'
-                    }
-                },
-            });
-        });
     }
 
     readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems }) => {
@@ -76,7 +71,7 @@ export class AppStore extends ComponentStore<AppState> {
 
     readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cart?.cartData?.items ?? []);
 
-    readonly featuredContent$: Observable<IFeaturedContent | null> = this.select(state => state.featuredContent.content);
+    readonly featuredContent$: Observable<IContent | null> = this.select(state => state.featuredContent.content);
     readonly isGameListLoading$: Observable<boolean> = this.select(state => state.gameList.isLoading);
     readonly isFetauredContentLoading$: Observable<boolean> = this.select(state => state.featuredContent.isLoading);
 
@@ -110,6 +105,16 @@ export class AppStore extends ComponentStore<AppState> {
         };
     });
 
+    protected readonly setFeaturedContent = this.updater((state, content: IContent) => {
+        return {
+            ...state,
+            featuredContent: {
+                content,
+                isLoading: false,
+            }
+        };
+    });
+
     public readonly loadGames = this.effect((params$) => {
         return params$.pipe(
             concatMap(() => this.gameService.getAll()),
@@ -133,6 +138,15 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(() => this.cartService.getById("1")),
             tap((cartData: ICart) => {
                 this.setCart(cartData);
+            })
+        );
+    });
+
+    public readonly loadFeaturedContent = this.effect((params$) => {
+        return params$.pipe(
+            concatMap(() => this.contentService.getById("1")),
+            tap((cartData: IContent) => {
+                this.setFeaturedContent(cartData);
             })
         );
     });

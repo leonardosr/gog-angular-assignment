@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LibraryService } from 'src/services/library.service';
 import { CartService } from 'src/services/cart.service';
 import { MiniCartComponent } from "../comon-ui/mini-cart/mini-cart.component";
+import { ContentService } from 'src/services/content.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ import { MiniCartComponent } from "../comon-ui/mini-cart/mini-cart.component";
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NavbarComponent, FeaturedComponent, CatalogComponent, MiniCartComponent],
-  providers: [AppStore, GameService, LibraryService, CartService]
+  providers: [AppStore, GameService, LibraryService, CartService, ContentService]
 })
 export class AppComponent implements OnInit {
   public readonly featuredContent = toSignal(this.appStore.featuredContent$, { initialValue: initialState.featuredContent.content });
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.appStore.loadFeaturedContent();
     this.appStore.loadUserLibrary();
     this.appStore.loadCart();
     this.appStore.loadGames();

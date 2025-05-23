@@ -13,7 +13,7 @@
     </a>
     <div class="card-footer d-flex justify-content-end">
         @if(!item()?.isInCart && !item()?.isInLibrary) {
-        @if(item()?.game?.discount) {
+        @if(item()?.game?.discount && item()!.game!.discount! > 0) {
         <span class="badge badge-sm text-bg-success me-1" aria-label="Discount">
             {{item()?.game?.discount | discount }}
         </span>

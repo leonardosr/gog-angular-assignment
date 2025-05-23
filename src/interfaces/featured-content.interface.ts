@@ -1,3 +1,3 @@
-export interface IFeaturedContent {
-    backgroundImageUrl: string;
+export interface IContent {
+    featuredImage: string;
 }

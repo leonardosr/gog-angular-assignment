@@ -1,29 +1,31 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CartService } from 'src/services/cart.service';
+import { ContentService } from 'src/services/content.service';
+import { GameService } from 'src/services/game.service';
+import { LibraryService } from 'src/services/library.service';
+import { AppStore } from './app.component.store';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    imports: [AppComponent],
+    declarations: [],
+    providers: [
+      AppStore,
+      GameService,
+      LibraryService,
+      CartService,
+      ContentService,
+      provideHttpClient(),
+      provideHttpClientTesting()
+    ]
   }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'gog-assignment'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('gog-assignment');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('gog-assignment app is running!');
   });
 });

@@ -55,11 +55,11 @@
         {
           "id": "0",
           "game": {
-            "id": "5",
-            "title": "Assassin’s creed: Director’s Cut",
-            "thumbnail": "assets/_remote-assets/game5.webp",
-            "discount": 0,
-            "price": 9.99
+            "id": "4",
+            "title": "Neverwinter Nights",
+            "thumbnail": "assets/_remote-assets/game4.webp",
+            "discount": null,
+            "price": 19.99
           }
         },
         {
@@ -73,6 +73,12 @@
           }
         }
       ]
+    }
+  ],
+  "content": [
+    {
+      "id": "1",
+      "featuredImage": "assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.webp"
     }
   ]
 }

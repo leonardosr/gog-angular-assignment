@@ -1,8 +1,23 @@
 import { DiscountPipe } from './discount.pipe';
 
 describe('DiscountPipe', () => {
-  it('create an instance', () => {
-    const pipe = new DiscountPipe();
-    expect(pipe).toBeTruthy();
+  let pipe: DiscountPipe;
+
+  beforeEach(() => {
+    pipe = new DiscountPipe();
+  });
+
+  const cases: Array<{ input: any, expected: string }> = [
+    { input: 50, expected: '-50%' },
+    { input: null, expected: '' },
+    { input: undefined, expected: '' },
+    { input: NaN, expected: '' },
+    { input: 'abc', expected: '' },
+  ];
+
+  cases.forEach(({ input, expected }) => {
+    it(`should return "${expected}" for input: ${input}`, () => {
+      expect(pipe.transform(input)).toBe(expected);
+    });
   });
 });
