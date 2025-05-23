@@ -87,15 +87,15 @@ src/
   app/
     app.component.ts
     app.component.store.ts
-    app.const.ts
-    ...
   comon-ui/
-    navbar/
-    mini-cart/
     catalog/
     featured/
+    mini-cart/
+    navbar/
   interfaces/
   pipes/
+  services/
+  utils/
   assets/
     styles/
       themes/
