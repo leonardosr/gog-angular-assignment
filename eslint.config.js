@@ -30,6 +30,14 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
+      "@/quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }
+      ]
     },
   },
   {

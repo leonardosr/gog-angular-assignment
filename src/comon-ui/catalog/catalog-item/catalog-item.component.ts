@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, EventEmitter, input, Output } from '@angular/core';
 import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
-import { DiscountPipe } from "../../../pipes/discount.pipe";
+import { DiscountPipe } from '../../../pipes/discount.pipe';
 
 @Component({
   selector: 'app-catalog-item',

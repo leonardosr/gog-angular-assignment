@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { ComponentStore } from "@ngrx/component-store";
-import { concatMap, Observable, tap } from "rxjs";
-import { ICart, ICartItem } from "src/interfaces/cart-item.interface";
-import { ICatalogItem } from "src/interfaces/catalog-item.interface";
-import { IContent } from "src/interfaces/featured-content.interface";
-import { IGame } from "src/interfaces/game.interface";
-import { ILibraryItem } from "src/interfaces/library-item.interface";
-import { PLACEHOLDER_CATALOG_LIST } from "./app.const";
-import { GameService } from "src/services/game.service";
-import { LibraryService } from "src/services/library.service";
-import { CartService } from "src/services/cart.service";
-import { ContentService } from "src/services/content.service";
+import { Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { concatMap, Observable, tap } from 'rxjs';
+import { ICart, ICartItem } from 'src/interfaces/cart-item.interface';
+import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
+import { IContent } from 'src/interfaces/featured-content.interface';
+import { IGame } from 'src/interfaces/game.interface';
+import { ILibraryItem } from 'src/interfaces/library-item.interface';
+import { PLACEHOLDER_CATALOG_LIST } from './app.const';
+import { GameService } from 'src/services/game.service';
+import { LibraryService } from 'src/services/library.service';
+import { CartService } from 'src/services/cart.service';
+import { ContentService } from 'src/services/content.service';
 
 export interface AppState {
     featuredContent: {
@@ -135,7 +135,7 @@ export class AppStore extends ComponentStore<AppState> {
 
     public readonly loadCart = this.effect((params$) => {
         return params$.pipe(
-            concatMap(() => this.cartService.getById("1")),
+            concatMap(() => this.cartService.getById('1')),
             tap((cartData: ICart) => {
                 this.setCart(cartData);
             })
@@ -144,7 +144,7 @@ export class AppStore extends ComponentStore<AppState> {
 
     public readonly loadFeaturedContent = this.effect((params$) => {
         return params$.pipe(
-            concatMap(() => this.contentService.getById("1")),
+            concatMap(() => this.contentService.getById('1')),
             tap((cartData: IContent) => {
                 this.setFeaturedContent(cartData);
             })
@@ -164,7 +164,7 @@ export class AppStore extends ComponentStore<AppState> {
 
     public addTocart = this.effect<{ gameId: string }>((params$) => {
         return params$.pipe(
-            concatMap(({ gameId }) => this.cartService.addToCart("1", gameId)),
+            concatMap(({ gameId }) => this.cartService.addToCart('1', gameId)),
             tap(() => {
                 this.loadCart();
             })
@@ -173,7 +173,7 @@ export class AppStore extends ComponentStore<AppState> {
 
     public removeFromCart = this.effect<{ itemId: string }>((params$) => {
         return params$.pipe(
-            concatMap(({ itemId }) => this.cartService.removeFromCart("1", itemId)),
+            concatMap(({ itemId }) => this.cartService.removeFromCart('1', itemId)),
             tap(() => {
                 this.loadCart();
             })

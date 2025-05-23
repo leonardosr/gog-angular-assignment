@@ -1,6 +1,6 @@
 import { Component, EventEmitter, input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CatalogItemComponent } from "./catalog-item/catalog-item.component";
+import { CatalogItemComponent } from './catalog-item/catalog-item.component';
 import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
 
 @Component({

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, EventEmitter, HostListener, input, Output, signal } from '@angular/core';
 import { ICartItem } from 'src/interfaces/cart-item.interface';
 import { AmountPipe } from 'src/pipes/amount.pipe';
-import { FinalGamePricePipe } from "../../pipes/final-game-price.pipe";
+import { FinalGamePricePipe } from '../../pipes/final-game-price.pipe';
 
 @Component({
   selector: 'app-mini-cart',
