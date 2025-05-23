@@ -22,7 +22,7 @@ export class CartService extends ApiService<ICart> {
     }).pipe(
       switchMap(({ cart, game }) => {
         return this.httpClient.patch<void>(`${this.apiEndpoint}/${id}`, {
-          items: [...cart.items, {
+          items: [...cart.items.filter((item: ICartItem) => item.game.id !== gameId), {
             id: cart.items.length.toString(),
             game
           }]
