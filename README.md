@@ -3,6 +3,14 @@
 This is a sample shopping cart application built with Angular (v18) as part of a Senior Front End Developer assignment for GoG.  
 It demonstrates modern Angular features, accessibility, state management, and a modular component structure.
 
+## Features
+
+- Modern Angular 18 with standalone components and signals
+- Responsive design using Bootstrap 5 and custom theming
+- Modular state management with @ngrx/component-store
+- Mock API with json-server for local development
+- Unit tests for components, pipes, and store logic
+
 ## Getting Started
 
 ### Prerequisites
