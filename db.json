@@ -51,7 +51,28 @@
   "cart": [
     {
       "id": "1",
-      "items": []
+      "items": [
+        {
+          "id": "0",
+          "game": {
+            "id": "5",
+            "title": "Assassin’s creed: Director’s Cut",
+            "thumbnail": "assets/_remote-assets/game5.webp",
+            "discount": 0,
+            "price": 9.99
+          }
+        },
+        {
+          "id": "1",
+          "game": {
+            "id": "3",
+            "title": "The settlers 2: Gold Edition",
+            "thumbnail": "assets/_remote-assets/game3.webp",
+            "discount": null,
+            "price": 5.99
+          }
+        }
+      ]
     }
   ],
   "content": [
