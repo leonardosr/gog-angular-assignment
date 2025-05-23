@@ -2,7 +2,7 @@
     [attr.aria-expanded]="isOpen()" tabindex="0">
     <div class="cart bg-white d-flex flex-wrap align-content-center justify-content-center placeholder-glow"
         [class.placeholder]="isLoading()" role="button" [attr.aria-label]="'Cart with' + cartItems().length + 'items'">
-        <img class="cart-icon" src="assets/images/icons/cart.svg" alt="Cart icon" />
+        <img class="cart-icon flash" src="assets/images/icons/cart.svg" alt="Cart icon" />
         <span class="cart-qty" aria-live="polite">{{cartItems().length}}</span>
     </div>
 </a>
