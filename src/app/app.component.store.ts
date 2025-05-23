@@ -124,7 +124,7 @@ export class AppStore extends ComponentStore<AppState> {
         );
     });
 
-    public readonly loadUserLibrary = this.effect((params$) => {
+    public readonly loadLibrary = this.effect((params$) => {
         return params$.pipe(
             concatMap(() => this.libraryService.getAll()),
             tap((items: ILibraryItem[]) => {

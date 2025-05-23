@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.appStore.loadFeaturedContent();
-    this.appStore.loadUserLibrary();
+    this.appStore.loadLibrary();
     this.appStore.loadCart();
     this.appStore.loadGames();
   }

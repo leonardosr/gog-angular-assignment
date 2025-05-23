@@ -22,9 +22,11 @@ describe('CartService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [provideHttpClient(),
-      provideHttpClientTesting()],
-      providers: [CartService]
+      providers: [
+        CartService,
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
     });
     service = TestBed.inject(CartService);
     httpMock = TestBed.inject(HttpTestingController);

@@ -9,23 +9,41 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [AppComponent],
-    declarations: [],
-    providers: [
-      AppStore,
-      GameService,
-      LibraryService,
-      CartService,
-      ContentService,
-      provideHttpClient(),
-      provideHttpClientTesting()
-    ]
-  }));
+  let fixture: ReturnType<typeof TestBed.createComponent<AppComponent>>;
+  let compiled: HTMLElement;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppComponent],
+      declarations: [],
+      providers: [
+        AppStore,
+        GameService,
+        LibraryService,
+        CartService,
+        ContentService,
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
+    });
+    fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    compiled = fixture.nativeElement as HTMLElement;
+  });
+
+  it('should render the navbar', () => {
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+  });
+
+  it('should render the catalog', () => {
+    expect(compiled.querySelector('app-catalog')).toBeTruthy();
+  });
+
+  it('should render the featured section', () => {
+    expect(compiled.querySelector('app-featured')).toBeTruthy();
+  });
+
+  it('should render the mini cart', () => {
+    expect(compiled.querySelector('app-mini-cart')).toBeTruthy();
   });
 });

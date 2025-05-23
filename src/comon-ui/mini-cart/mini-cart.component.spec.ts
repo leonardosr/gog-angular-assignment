@@ -16,10 +16,6 @@ describe('MiniCartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should emit clearCart event', () => {
     spyOn(component.clearCart, 'emit');
     component.clearCart.emit();
