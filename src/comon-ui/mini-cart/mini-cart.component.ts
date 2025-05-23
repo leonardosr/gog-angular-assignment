@@ -15,6 +15,14 @@ import { calculateCartTotal } from 'src/utils/price-utils';
 
 })
 export class MiniCartComponent {
+  // Close the cart on ESC key
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscKey(event: KeyboardEvent) {
+    if (this.isOpen()) {
+      this.isOpen.set(false);
+      event.stopPropagation();
+    }
+  }
   // Only close the cart if the click is outside both the cart panel and the cart button.
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -40,7 +48,7 @@ export class MiniCartComponent {
     return calculateCartTotal(cartItems);
   });
 
-  public toggleCart(event: MouseEvent) {
+  public toggleCart(event: MouseEvent | Event) {
     event.preventDefault();
     this.isOpen.set(!this.isOpen());
   }

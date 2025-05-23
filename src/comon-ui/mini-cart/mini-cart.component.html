@@ -1,5 +1,5 @@
-<a class="cart-link" href="#" (click)="toggleCart($event)" aria-label="Open cart" aria-haspopup="dialog"
-    [attr.aria-expanded]="isOpen()" tabindex="0">
+<a class="cart-link" href="#" (click)="toggleCart($event)" (keydown.enter)="toggleCart($event)" aria-label="Open cart"
+    aria-haspopup="dialog" [attr.aria-expanded]="isOpen()" tabindex="0">
     <div class="cart bg-white d-flex flex-wrap align-content-center justify-content-center placeholder-glow"
         [class.placeholder]="isLoading()" role="button" [attr.aria-label]="'Cart with' + cartItems().length + 'items'">
         <img class="cart-icon flash" src="assets/images/icons/cart.svg" alt="Cart icon" />
