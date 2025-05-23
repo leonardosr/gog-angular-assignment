@@ -11,6 +11,7 @@ import { GameService } from 'src/services/game.service';
 import { LibraryService } from 'src/services/library.service';
 import { CartService } from 'src/services/cart.service';
 import { ContentService } from 'src/services/content.service';
+import { buildCatalogItems } from 'src/utils/catalog-utils';
 
 export interface AppState {
     featuredContent: {
@@ -60,13 +61,11 @@ export class AppStore extends ComponentStore<AppState> {
         super(initialState);
     }
 
+    // Combines game, cart, and library state to produce catalog items with isInCart/isInLibrary flags.
+    // Returns a placeholder list while loading for the first time.
     readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems }) => {
         if (gameList.isLoading) return PLACEHOLDER_CATALOG_LIST;
-        return gameList.games.map((game: IGame) => ({
-            game,
-            isInLibrary: libraryItems.items.some((cartItem: ICartItem) => cartItem.game.id === game.id),
-            isInCart: cart.cartData?.items.some((libraryItem: ILibraryItem) => libraryItem.game.id === game.id),
-        }))
+        return buildCatalogItems(gameList.games, cart.cartData, libraryItems.items);
     });
 
     readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cart?.cartData?.items ?? []);

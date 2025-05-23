@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, EventEmitter, HostListene
 import { ICartItem } from 'src/interfaces/cart-item.interface';
 import { AmountPipe } from 'src/pipes/amount.pipe';
 import { FinalGamePricePipe } from '../../pipes/final-game-price.pipe';
+import { calculateCartTotal } from 'src/utils/price-utils';
 
 @Component({
   selector: 'app-mini-cart',
@@ -14,6 +15,7 @@ import { FinalGamePricePipe } from '../../pipes/final-game-price.pipe';
 
 })
 export class MiniCartComponent {
+  // Only close the cart if the click is outside both the cart panel and the cart button.
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const cartPanel = document.querySelector('.cart-panel');
@@ -35,10 +37,7 @@ export class MiniCartComponent {
   public readonly isOpen = signal<boolean>(false);
   public readonly cartTotal = computed<number>(() => {
     const cartItems = this.cartItems();
-    return cartItems.reduce((acc, { game }) => {
-      const gamePrice = new FinalGamePricePipe().transform(game) ?? 0;
-      return acc + gamePrice;
-    }, 0);
+    return calculateCartTotal(cartItems);
   });
 
   public toggleCart(event: MouseEvent) {
