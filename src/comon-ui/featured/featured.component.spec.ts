@@ -27,12 +27,15 @@ describe('FeaturedComponent', () => {
     expect(content.classes['placeholder']).toBeTrue();
   });
 
-  it('should set background image style', () => {
+  it('should render the featured image with correct src and alt', () => {
     fixture.componentRef.setInput('isLoading', false);
-    fixture.componentRef.setInput('featuredContent', { featuredImage: 'test.jpg', title: 'Test' });
+    fixture.componentRef.setInput('featuredContent', { featuredImage: 'test.jpg' });
+    fixture.componentRef.setInput('featuredContentTitle', 'Test');
     fixture.detectChanges();
-    const content = fixture.debugElement.query(By.css('.featured-content'));
-    expect(content.styles['background-image']).toContain('test.jpg');
+    const img = fixture.debugElement.query(By.css('.featured-image'));
+    expect(img).toBeTruthy();
+    expect(img.attributes['ng-reflect-ng-src'] || img.nativeElement.src).toContain('test.jpg');
+    expect(img.attributes['alt']).toBe('Test');
   });
 
   it('should render the secret button but keep it invisible', () => {
