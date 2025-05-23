@@ -67,4 +67,16 @@ describe('MiniCartComponent', () => {
     fixture.detectChanges();
     expect(component.isOpen()).toBeFalse();
   });
+
+  it('should not open the cart when isLoading is true', () => {
+    fixture.componentRef.setInput('isLoading', true);
+    component.isOpen.set(false);
+    fixture.detectChanges();
+
+    const event = new KeyboardEvent('keydown', { key: 'Enter' });
+    window.dispatchEvent(event);
+    fixture.detectChanges();
+
+    expect(component.isOpen()).toBeFalse();
+  });
 });

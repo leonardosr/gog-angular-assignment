@@ -49,6 +49,7 @@ export class MiniCartComponent {
   });
 
   public toggleCart(event: MouseEvent | Event) {
+    if (this.isLoading()) return;
     event.preventDefault();
     this.isOpen.set(!this.isOpen());
   }
