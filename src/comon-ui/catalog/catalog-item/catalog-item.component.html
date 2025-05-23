@@ -1,8 +1,8 @@
 <div class="catalog-item-card card placeholder-glow">
     <a class="game-link" href="#">
-        <div class="card-header" [class.placeholder]="isLoading()"
-            [style.background-image]="'url(' + item()?.game?.thumbnail + ')'" role="img"
-            [attr.aria-label]="item()?.game?.title || 'Game cover'" [attr.title]="item()?.game?.title || 'Game cover'">
+        <div class="card-header" [class.placeholder]="isLoading()" [style.background-image]="itemThumbailBackground()"
+            role="img" [attr.aria-label]="item()?.game?.title || 'Game cover'"
+            [attr.title]="item()?.game?.title || 'Game cover'">
         </div>
         <div class="card-body">
             <span class="item-title d-block" [class.placeholder]="isLoading()" tabindex="0"
@@ -15,7 +15,7 @@
         @if(!item()?.isInCart && !item()?.isInLibrary) {
         @if(item()?.game?.discount) {
         <span class="badge badge-sm text-bg-success me-1" aria-label="Discount">
-            -{{item()?.game?.discount}}%
+            {{item()?.game?.discount | discount }}
         </span>
         }
         @if(item()?.game?.price) {

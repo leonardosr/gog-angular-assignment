@@ -58,7 +58,7 @@ export class AppStore extends ComponentStore<AppState> {
                 featuredContent: {
                     isLoading: false,
                     content: {
-                        backgroundImageUrl: 'assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.png'
+                        backgroundImageUrl: 'assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.webp'
                     }
                 },
             });
