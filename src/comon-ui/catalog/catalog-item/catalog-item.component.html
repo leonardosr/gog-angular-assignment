@@ -21,7 +21,8 @@
         }
         @if(item()?.game?.price) {
         <button class="btn btn-sm btn-outline-dark" type="button" (click)="handleAddToCart(item()!.game!.id)"
-            [attr.aria-label]="'Buy ' + (item()?.game?.title || '') + ' for $' + (item()?.game?.price || '')">
+            [attr.aria-label]="'Buy ' + (item()?.game?.title || '') + ' for $' + (item()?.game?.price || '')"
+            [disabled]="item()?.isPending">
             {{item()?.game?.price | currency }}
         </button>
         }

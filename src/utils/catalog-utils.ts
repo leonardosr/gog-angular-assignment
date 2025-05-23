@@ -6,11 +6,14 @@ import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
 export function buildCatalogItems(
     games: IGame[],
     cart: ICart | null,
-    libraryItems: ILibraryItem[]
+    libraryItems: ILibraryItem[],
+    pendingCartItems: Set<string>
 ): ICatalogItem[] {
     return games.map((game: IGame) => ({
         game,
         isInLibrary: libraryItems.some((libItem) => libItem.game.id === game.id),
         isInCart: cart?.items.some((cartItem) => cartItem.game.id === game.id) ?? false,
+        isPending: pendingCartItems.has(game.id)
+
     }));
 }

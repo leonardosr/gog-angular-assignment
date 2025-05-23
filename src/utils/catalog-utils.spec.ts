@@ -23,9 +23,10 @@ describe('buildCatalogItems', () => {
             games: [game1, game2],
             cart,
             libraryItems,
+            pending: new Set([]),
             expected: [
-                { game: game1, isInLibrary: false, isInCart: true },
-                { game: game2, isInLibrary: true, isInCart: false }
+                { game: game1, isInLibrary: false, isInCart: true, isPending: false },
+                { game: game2, isInLibrary: true, isInCart: false, isPending: false }
             ]
         },
         {
@@ -33,6 +34,7 @@ describe('buildCatalogItems', () => {
             games: [],
             cart,
             libraryItems,
+            pending: new Set([]),
             expected: []
         },
         {
@@ -40,8 +42,9 @@ describe('buildCatalogItems', () => {
             games: [game1],
             cart: null,
             libraryItems: [],
+            pending: new Set([]),
             expected: [
-                { game: game1, isInLibrary: false, isInCart: false }
+                { game: game1, isInLibrary: false, isInCart: false, isPending: false }
             ]
         },
         {
@@ -49,8 +52,9 @@ describe('buildCatalogItems', () => {
             games: [game1],
             cart,
             libraryItems: [],
+            pending: new Set([]),
             expected: [
-                { game: game1, isInLibrary: false, isInCart: true }
+                { game: game1, isInLibrary: false, isInCart: true, isPending: false }
             ]
         },
         {
@@ -58,15 +62,27 @@ describe('buildCatalogItems', () => {
             games: [game1],
             cart: { id: '1', items: [] },
             libraryItems: [],
+            pending: new Set([]),
             expected: [
-                { game: game1, isInLibrary: false, isInCart: false }
+                { game: game1, isInLibrary: false, isInCart: false, isPending: false }
+            ]
+        },
+        {
+            desc: 'should set isPending true if game id is in pendingCartItems',
+            games: [game1, game2],
+            cart,
+            libraryItems,
+            pending: new Set(['g2']),
+            expected: [
+                { game: game1, isInLibrary: false, isInCart: true, isPending: false },
+                { game: game2, isInLibrary: true, isInCart: false, isPending: true }
             ]
         }
     ];
 
-    cases.forEach(({ desc, games, cart, libraryItems, expected }) => {
+    cases.forEach(({ desc, games, cart, libraryItems, pending, expected }) => {
         it(desc, () => {
-            expect(buildCatalogItems(games, cart, libraryItems)).toEqual(expected);
+            expect(buildCatalogItems(games, cart, libraryItems, pending)).toEqual(expected);
         });
     });
 });

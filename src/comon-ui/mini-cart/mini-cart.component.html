@@ -50,7 +50,11 @@
     } @else {
     <div class="empty-cart d-flex align-content-center justify-content-center flex-wrap flex-column" aria-live="polite">
         <img class="cart-icon align-self-center mb-2" src="assets/images/icons/cart.svg" alt="Empty cart" />
-        <span>Your cart is empty</span>
+        <span class="mb-2">Your cart is empty</span>
+        <button type="button" class="btn btn-outline-dark ms-auto" aria-label="Back to shopping"
+            (click)="isOpen.set(false)">
+            Back to shopping
+        </button>
     </div>
     }
 </div>

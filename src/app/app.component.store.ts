@@ -30,6 +30,7 @@ export interface AppState {
         isLoading: boolean,
         cartData: ICart | null
     };
+    pendingCartItems: Set<string>
 }
 
 export const initialState: AppState = {
@@ -49,6 +50,7 @@ export const initialState: AppState = {
         isLoading: true,
         items: []
     },
+    pendingCartItems: new Set<string>([])
 }
 
 @Injectable()
@@ -63,9 +65,9 @@ export class AppStore extends ComponentStore<AppState> {
 
     // Combines game, cart, and library state to produce catalog items with isInCart/isInLibrary flags.
     // Returns a placeholder list while loading for the first time.
-    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems }) => {
+    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems, pendingCartItems }) => {
         if (gameList.isLoading) return PLACEHOLDER_CATALOG_LIST;
-        return buildCatalogItems(gameList.games, cart.cartData, libraryItems.items);
+        return buildCatalogItems(gameList.games, cart.cartData, libraryItems.items, pendingCartItems);
     });
 
     readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cart?.cartData?.items ?? []);
@@ -111,6 +113,13 @@ export class AppStore extends ComponentStore<AppState> {
                 content,
                 isLoading: false,
             }
+        };
+    });
+
+    protected readonly addPendingCartItem = this.updater((state, gameId: string) => {
+        return {
+            ...state,
+            pendingCartItems: new Set(state.pendingCartItems).add(gameId)
         };
     });
 
@@ -185,6 +194,7 @@ export class AppStore extends ComponentStore<AppState> {
 
     public addTocart = this.effect<{ gameId: string }>((params$) => {
         return params$.pipe(
+            tap(({ gameId }) => this.addPendingCartItem(gameId)),
             concatMap(({ gameId }) => this.cartService.addToCart('1', gameId)),
             tap(() => {
                 this.loadCart();

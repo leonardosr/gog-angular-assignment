@@ -50,4 +50,21 @@ describe('MiniCartComponent', () => {
     component.onDocumentClick(event);
     expect(component.isOpen()).toBe(false);
   });
+
+  it('should show "Back to shopping" button when cart is empty', () => {
+    component.isOpen.set(true);
+    fixture.detectChanges();
+    const btn = fixture.debugElement.nativeElement.querySelector('.empty-cart .btn');
+    expect(btn).toBeTruthy();
+    expect(btn.textContent).toContain('Back to shopping');
+  });
+
+  it('should close the cart when "Back to shopping" is clicked', () => {
+    component.isOpen.set(true);
+    fixture.detectChanges();
+    const btn = fixture.debugElement.nativeElement.querySelector('.empty-cart .btn');
+    btn.click();
+    fixture.detectChanges();
+    expect(component.isOpen()).toBeFalse();
+  });
 });
