@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { CartService } from './cart.service';
 import { API_URLS } from 'src/constants/api-endpoints.const';
-import { ICart, ICartItem } from 'src/interfaces/cart-item.interface';
+import { ICart } from 'src/interfaces/cart-item.interface';
 import { IGame } from 'src/interfaces/game.interface';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('CartService', () => {
   let service: CartService;
@@ -21,7 +22,8 @@ describe('CartService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [provideHttpClient(),
+      provideHttpClientTesting()],
       providers: [CartService]
     });
     service = TestBed.inject(CartService);
@@ -39,17 +41,14 @@ describe('CartService', () => {
   it('should add a game to the cart', () => {
     service.addToCart(cartId, gameId).subscribe();
 
-    // getById
     const cartReq = httpMock.expectOne(`${API_URLS.cart}/${cartId}`);
     expect(cartReq.request.method).toBe('GET');
     cartReq.flush(cartMock);
 
-    // get game
     const gameReq = httpMock.expectOne(`${API_URLS.games}/${gameId}`);
     expect(gameReq.request.method).toBe('GET');
     gameReq.flush(gameMock);
 
-    // patch cart
     const patchReq = httpMock.expectOne(`${API_URLS.cart}/${cartId}`);
     expect(patchReq.request.method).toBe('PATCH');
     expect(patchReq.request.body.items.length).toBe(2);
@@ -59,12 +58,10 @@ describe('CartService', () => {
   it('should remove an item from the cart', () => {
     service.removeFromCart(cartId, '0').subscribe();
 
-    // getById
     const cartReq = httpMock.expectOne(`${API_URLS.cart}/${cartId}`);
     expect(cartReq.request.method).toBe('GET');
     cartReq.flush(cartMock);
 
-    // patch cart
     const patchReq = httpMock.expectOne(`${API_URLS.cart}/${cartId}`);
     expect(patchReq.request.method).toBe('PATCH');
     expect(patchReq.request.body.items.length).toBe(0);

@@ -5,7 +5,6 @@ import { FeaturedComponent } from "../comon-ui/featured/featured.component";
 import { CatalogComponent } from 'src/comon-ui/catalog/catalog.component';
 import { AppStore, initialState } from './app.component.store';
 import { GameService } from 'src/services/game.service';
-import { HttpClientModule } from '@angular/common/http';
 import { LibraryService } from 'src/services/library.service';
 import { CartService } from 'src/services/cart.service';
 import { MiniCartComponent } from "../comon-ui/mini-cart/mini-cart.component";

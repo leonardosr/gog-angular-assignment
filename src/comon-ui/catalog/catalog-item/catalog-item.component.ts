@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, EventEmitter, input, Output } from '@angular/core';
 import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
-import { FinalGamePricePipe } from 'src/pipes/final-game-price.pipe';
 import { DiscountPipe } from "../../../pipes/discount.pipe";
 
 @Component({

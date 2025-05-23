@@ -3,7 +3,6 @@ import { FeaturedComponent } from './featured.component';
 import { By } from '@angular/platform-browser';
 
 describe('FeaturedComponent', () => {
-  let component: FeaturedComponent;
   let fixture: ComponentFixture<FeaturedComponent>;
 
   beforeEach(() => {
@@ -11,7 +10,6 @@ describe('FeaturedComponent', () => {
       imports: [FeaturedComponent]
     });
     fixture = TestBed.createComponent(FeaturedComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

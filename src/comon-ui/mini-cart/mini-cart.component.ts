@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, EventEmitter, Host, HostListener, input, Output, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, EventEmitter, HostListener, input, Output, signal } from '@angular/core';
 import { ICartItem } from 'src/interfaces/cart-item.interface';
 import { AmountPipe } from 'src/pipes/amount.pipe';
 import { FinalGamePricePipe } from "../../pipes/final-game-price.pipe";

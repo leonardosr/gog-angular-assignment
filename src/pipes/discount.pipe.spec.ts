@@ -7,7 +7,8 @@ describe('DiscountPipe', () => {
     pipe = new DiscountPipe();
   });
 
-  const cases: Array<{ input: any, expected: string }> = [
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const cases: { input: any, expected: string }[] = [
     { input: 50, expected: '-50%' },
     { input: null, expected: '' },
     { input: undefined, expected: '' },

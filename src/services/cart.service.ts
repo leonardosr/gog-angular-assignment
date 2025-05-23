@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ICart, ICartItem } from 'src/interfaces/cart-item.interface';
 import { ApiService } from './api.service';
 import { API_URLS } from 'src/constants/api-endpoints.const';
-import { concatMap, EMPTY, forkJoin, Observable, switchMap } from 'rxjs';
+import { forkJoin, Observable, switchMap } from 'rxjs';
 import { IGame } from 'src/interfaces/game.interface';
 
 const API_ENDPOINT = API_URLS.cart;

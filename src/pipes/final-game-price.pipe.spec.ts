@@ -8,7 +8,7 @@ describe('FinalGamePricePipe', () => {
     pipe = new FinalGamePricePipe();
   });
 
-  const cases: Array<{ game: Partial<IGame> | null | undefined, expected: number | null }> = [
+  const cases: { game: Partial<IGame> | null | undefined, expected: number | null }[] = [
     { game: null, expected: null },
     { game: undefined, expected: null },
     { game: { price: undefined }, expected: null },

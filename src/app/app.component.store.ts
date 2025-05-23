@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore } from "@ngrx/component-store";
-import { concatMap, delay, Observable, tap } from "rxjs";
+import { concatMap, Observable, tap } from "rxjs";
 import { ICart, ICartItem } from "src/interfaces/cart-item.interface";
 import { ICatalogItem } from "src/interfaces/catalog-item.interface";
 import { IContent } from "src/interfaces/featured-content.interface";
