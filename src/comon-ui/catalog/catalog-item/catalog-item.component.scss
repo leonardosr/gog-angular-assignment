@@ -9,7 +9,7 @@ a.game-link {
 }
 
 .catalog-item-card {
-    height: 186px;
+    height: 200px;
 
     .item-thumbnail {
         object-fit: cover;
@@ -17,6 +17,7 @@ a.game-link {
 
     .card-header {
         position: relative;
+        height: 160px;
     }
 
     .card-body {
@@ -54,15 +55,9 @@ a.game-link {
     }
 }
 
-@include media-breakpoint-up(xs) {
-    .card-header {
-        height: 100px;
-    }
-}
-
 @include media-breakpoint-up(lg) {
-    .card-header {
-        height: 300px;
+    .catalog-item-card {
+        height: 186px;
     }
 }
 
