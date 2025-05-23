@@ -8,10 +8,20 @@ $breakpoint-lg: map-get($grid-breakpoints, lg);
 $breakpoint-xl: map-get($grid-breakpoints, xl);
 
 .catalog-item {
-    width: 100%;
+    width: 50%;
     float: left;
     box-sizing: border-box;
     margin-bottom: 1.25rem;
+
+    &:nth-child(2n + 1) {
+        padding-right: 0.25rem;
+        padding-left: 0;
+    }
+
+    &:nth-child(2n) {
+        padding-left: 0.25rem;
+        padding-right: 0;
+    }
 }
 
 @include media-breakpoint-up(lg) {
@@ -20,16 +30,6 @@ $breakpoint-xl: map-get($grid-breakpoints, xl);
         float: left;
         box-sizing: border-box;
         margin-bottom: 1.5rem;
-
-        &:nth-child(2n + 1) {
-            padding-right: 0.25rem;
-            padding-left: 0;
-        }
-
-        &:nth-child(2n) {
-            padding-left: 0.25rem;
-            padding-right: 0;
-        }
     }
 }
 
