@@ -9,8 +9,8 @@
 .cart {
     width: 59px;
     height: 59px;
-    border-left: 1px solid #b8b8b8;
-    border-right: 1px solid #b8b8b8;
+    border-left: 1px solid var(--bs-gray-400);
+    border-right: 1px solid var(--bs-gray-400);
 
     .cart-icon {
         height: 18px;
@@ -19,7 +19,7 @@
 
 .cart-item {
     height: 70px;
-    border-top: 1px solid #b8b8b8;
+    border-top: 1px solid var(--bs-gray-400);
     padding: 5px;
 
     .item-thumbnail {
@@ -69,7 +69,7 @@
     right: 0;
     z-index: 1050;
     animation: cart-fadein-up 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    border-right: 1px solid #b8b8b8;
+    border-right: 1px solid var(--bs-gray-400);
 
     .empty-cart {
         font-weight: 600;

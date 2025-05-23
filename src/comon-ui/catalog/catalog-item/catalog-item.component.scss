@@ -2,12 +2,6 @@
 @import 'node_modules/bootstrap/scss/mixins';
 @import 'src/assets/styles/themes/gog-bootstrap-theme/variables';
 
-$breakpoint-xs: map-get($grid-breakpoints, xs);
-$breakpoint-sm: map-get($grid-breakpoints, sm);
-$breakpoint-xl: map-get($grid-breakpoints, xl);
-$breakpoint-lg: map-get($grid-breakpoints, lg);
-
-
 a.game-link {
     text-decoration: none;
     color: var(--bs-body);
@@ -56,19 +50,19 @@ a.game-link {
     }
 }
 
-@media (min-width: $breakpoint-xs) {
+@include media-breakpoint-up(xs) {
     .card-header {
         height: 100px;
     }
 }
 
-@media (min-width: $breakpoint-lg) {
+@include media-breakpoint-up(lg) {
     .card-header {
-        height: 100px;
+        height: 300px;
     }
 }
 
-@media (min-width: $breakpoint-xl) {
+@include media-breakpoint-up(xl) {
     .card-header {
         height: 100px;
     }

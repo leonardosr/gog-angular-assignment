@@ -2,11 +2,6 @@
 @import 'node_modules/bootstrap/scss/mixins';
 @import 'src/assets/styles/themes/gog-bootstrap-theme/variables';
 
-$breakpoint-xs: map-get($grid-breakpoints, xs);
-$breakpoint-sm: map-get($grid-breakpoints, sm);
-$breakpoint-lg: map-get($grid-breakpoints, lg);
-$breakpoint-xl: map-get($grid-breakpoints, xl);
-
 .title {
     font-weight: 700;
     font-size: 15px;
@@ -43,21 +38,16 @@ $breakpoint-xl: map-get($grid-breakpoints, xl);
     }
 }
 
-@media (min-width: $breakpoint-sm) {
+@include media-breakpoint-up(sm) {
     .featured-content {
         height: 250px;
     }
 }
 
-@media (min-width: $breakpoint-xl) {
+@include media-breakpoint-up(xl) {
     .featured-content {
         height: 250px;
         margin-bottom: 1.5rem;
-    }
-}
-
-@media (min-width: $breakpoint-xl) {
-    .featured-content {
         height: 370px;
     }
 }

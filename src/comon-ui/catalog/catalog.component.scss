@@ -24,7 +24,7 @@ $breakpoint-xl: map-get($grid-breakpoints, xl);
     }
 }
 
-@media (min-width: $breakpoint-lg) {
+@include media-breakpoint-up(lg) {
     .catalog-item {
         width: 50%;
         float: left;
@@ -33,7 +33,7 @@ $breakpoint-xl: map-get($grid-breakpoints, xl);
     }
 }
 
-@media (min-width: $breakpoint-xl) {
+@include media-breakpoint-up(xl) {
     .catalog-item {
         width: 20%;
         float: left;
