@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { concatMap, Observable, tap } from 'rxjs';
+import { catchError, concatMap, EMPTY, Observable, tap } from 'rxjs';
 import { ICart, ICartItem } from 'src/interfaces/cart-item.interface';
 import { ICatalogItem } from 'src/interfaces/catalog-item.interface';
 import { IContent } from 'src/interfaces/featured-content.interface';
@@ -119,6 +119,12 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(() => this.gameService.getAll()),
             tap((games: IGame[]) => {
                 this.setGames(games);
+            }),
+            catchError(err => {
+                //Using console.error to simplify the error handling. 
+                //In a real app it sohuld be done using a toast component
+                console.error('[AppStore] loadGames effect failed:', err);
+                return EMPTY;
             })
         );
     });
@@ -128,6 +134,10 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(() => this.libraryService.getAll()),
             tap((items: ILibraryItem[]) => {
                 this.setLibrary(items);
+            }),
+            catchError(err => {
+                console.error('[AppStore] loadLibrary effect failed:', err);
+                return EMPTY;
             })
         );
     });
@@ -137,6 +147,10 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(() => this.cartService.getById('1')),
             tap((cartData: ICart) => {
                 this.setCart(cartData);
+            }),
+            catchError(err => {
+                console.error('[AppStore] loadCart effect failed:', err);
+                return EMPTY;
             })
         );
     });
@@ -146,6 +160,10 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(() => this.contentService.getById('1')),
             tap((cartData: IContent) => {
                 this.setFeaturedContent(cartData);
+            }),
+            catchError(err => {
+                console.error('[AppStore] loadFeaturedContent effect failed:', err);
+                return EMPTY;
             })
         );
     });
@@ -157,6 +175,10 @@ export class AppStore extends ComponentStore<AppState> {
             ),
             tap(() => {
                 this.loadCart();
+            }),
+            catchError(err => {
+                console.error('[AppStore] clearCart effect failed:', err);
+                return EMPTY;
             })
         )
     });
@@ -166,6 +188,10 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(({ gameId }) => this.cartService.addToCart('1', gameId)),
             tap(() => {
                 this.loadCart();
+            }),
+            catchError(err => {
+                console.error('[AppStore] addTocart effect failed:', err);
+                return EMPTY;
             })
         )
     });
@@ -175,6 +201,10 @@ export class AppStore extends ComponentStore<AppState> {
             concatMap(({ itemId }) => this.cartService.removeFromCart('1', itemId)),
             tap(() => {
                 this.loadCart();
+            }),
+            catchError(err => {
+                console.error('[AppStore] removeFromCart effect failed:', err);
+                return EMPTY;
             })
         )
     });

@@ -61,6 +61,16 @@
             "discount": null,
             "price": 19.99
           }
+        },
+        {
+          "id": "1",
+          "game": {
+            "id": "5",
+            "title": "Assassin’s creed: Director’s Cut",
+            "thumbnail": "assets/_remote-assets/game5.webp",
+            "discount": 0,
+            "price": 9.99
+          }
         }
       ]
     }

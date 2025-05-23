@@ -7,7 +7,7 @@ import { IGame } from 'src/interfaces/game.interface';
 import { ICart } from 'src/interfaces/cart-item.interface';
 import { ILibraryItem } from 'src/interfaces/library-item.interface';
 import { IContent } from 'src/interfaces/featured-content.interface';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('AppStore', () => {
     let store: AppStore;
@@ -49,6 +49,16 @@ describe('AppStore', () => {
                 }
             });
         });
+
+        it('should handle error in loadGames effect', (done) => {
+            spyOn(console, 'error');
+            gameService.getAll.and.returnValue(throwError(() => new Error('Games error')));
+            store.loadGames(of(void 0));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] loadGames effect failed:', jasmine.any(Error));
+                done();
+            }, 0);
+        });
     });
 
     describe('library', () => {
@@ -70,6 +80,16 @@ describe('AppStore', () => {
                 }
             });
         });
+
+        it('should handle error in loadLibrary effect', (done) => {
+            spyOn(console, 'error');
+            libraryService.getAll.and.returnValue(throwError(() => new Error('Library error')));
+            store.loadLibrary(of(void 0));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] loadLibrary effect failed:', jasmine.any(Error));
+                done();
+            }, 0);
+        });
     });
 
     describe('content', () => {
@@ -90,6 +110,16 @@ describe('AppStore', () => {
                     done();
                 }
             });
+        });
+
+        it('should handle error in loadFeaturedContent effect', (done) => {
+            spyOn(console, 'error');
+            contentService.getById.and.returnValue(throwError(() => new Error('Content error')));
+            store.loadFeaturedContent(of(void 0));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] loadFeaturedContent effect failed:', jasmine.any(Error));
+                done();
+            }, 0);
         });
     });
 
@@ -124,6 +154,16 @@ describe('AppStore', () => {
             }, 0);
         });
 
+        it('should handle error in clearCart effect', (done) => {
+            spyOn(console, 'error');
+            cartService.clearCart.and.returnValue(throwError(() => new Error('Clear cart error')));
+            store.clearCart(of(void 0));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] clearCart effect failed:', jasmine.any(Error));
+                done();
+            }, 0);
+        });
+
         it('should add to cart via addTocart effect', (done) => {
             cartService.addToCart.and.returnValue(of(void 0));
             cartService.getById.and.returnValue(of({ id: '1', items: [] }));
@@ -135,6 +175,16 @@ describe('AppStore', () => {
             }, 0);
         });
 
+        it('should handle error in addTocart effect', (done) => {
+            spyOn(console, 'error');
+            cartService.addToCart.and.returnValue(throwError(() => new Error('Add to cart error')));
+            store.addTocart(of({ gameId: 'g1' }));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] addTocart effect failed:', jasmine.any(Error));
+                done();
+            }, 0);
+        });
+
         it('should remove from cart via removeFromCart effect', (done) => {
             cartService.removeFromCart.and.returnValue(of(void 0));
             cartService.getById.and.returnValue(of({ id: '1', items: [] }));
@@ -142,6 +192,16 @@ describe('AppStore', () => {
             setTimeout(() => {
                 expect(cartService.removeFromCart).toHaveBeenCalledWith('1', 'i1');
                 expect(cartService.getById).toHaveBeenCalled();
+                done();
+            }, 0);
+        });
+
+        it('should handle error in removeFromCart effect', (done) => {
+            spyOn(console, 'error');
+            cartService.removeFromCart.and.returnValue(throwError(() => new Error('Remove from cart error')));
+            store.removeFromCart(of({ itemId: 'i1' }));
+            setTimeout(() => {
+                expect(console.error).toHaveBeenCalledWith('[AppStore] removeFromCart effect failed:', jasmine.any(Error));
                 done();
             }, 0);
         });
