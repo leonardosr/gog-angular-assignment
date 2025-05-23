@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { IContent } from 'src/interfaces/featured-content.interface';
 
@@ -5,7 +6,7 @@ import { IContent } from 'src/interfaces/featured-content.interface';
   selector: 'app-featured',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './featured.component.html',
   styleUrls: ['./featured.component.scss']
 })
@@ -13,8 +14,8 @@ export class FeaturedComponent {
   public readonly featuredContentTitle = input<string>()
   public readonly isLoading = input<boolean>(false);
   public readonly featuredContent = input<IContent | null>();
-  public readonly featuredBackgroundImage = computed(() => {
-    const backgroundImage = this.featuredContent()?.featuredImage;
-    return backgroundImage ? `url(${backgroundImage})` : 'none';
+  public readonly featuredImage = computed(() => {
+    const featuredImage = this.featuredContent()?.featuredImage;
+    return featuredImage ?? null;
   });
 }

@@ -24,8 +24,12 @@
     <div class="cart-items d-flex flex-column" role="list" aria-labelledby="cart-summary">
         @for(item of cartItems(); track item.id) {
         <div class="cart-item d-flex align-items-center" role="listitem">
-            <div class="item-thumbnail" [style.background-image]="'url(' + item.game.thumbnail" role="img"
-                [attr.aria-label]="item.game.title + ' cover'" [attr.title]="item.game.title"></div>
+            @if(item.game.thumbnail) {
+            <div class="item-thumbnail">
+                <img [ngSrc]="item.game.thumbnail" [alt]="item.game.title + ' cover'"
+                    [attr.aria-label]="item.game.title + ' cover'" [attr.title]="item.game.title" role="img" fill />
+            </div>
+            }
             <span class="d-flex item-info flex-column flex-grow-1">
                 <div class="d-flex w-100">
                     <span class="item-title flex-grow-1">

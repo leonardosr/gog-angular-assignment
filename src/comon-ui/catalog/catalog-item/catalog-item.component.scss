@@ -11,8 +11,12 @@ a.game-link {
 .catalog-item-card {
     height: 186px;
 
+    .item-thumbnail {
+        object-fit: cover;
+    }
+
     .card-header {
-        background-size: cover;
+        position: relative;
     }
 
     .card-body {

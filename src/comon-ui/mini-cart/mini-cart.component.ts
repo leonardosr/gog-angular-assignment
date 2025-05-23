@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, EventEmitter, HostListener, input, Output, signal } from '@angular/core';
 import { ICartItem } from 'src/interfaces/cart-item.interface';
 import { AmountPipe } from 'src/pipes/amount.pipe';
@@ -8,7 +8,7 @@ import { calculateCartTotal } from 'src/utils/price-utils';
 @Component({
   selector: 'app-mini-cart',
   standalone: true,
-  imports: [CommonModule, AmountPipe, FinalGamePricePipe],
+  imports: [CommonModule, AmountPipe, FinalGamePricePipe, NgOptimizedImage],
   templateUrl: './mini-cart.component.html',
   styleUrl: './mini-cart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
