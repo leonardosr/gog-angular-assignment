@@ -32,10 +32,10 @@
             }
             <span class="d-flex item-info flex-column flex-grow-1">
                 <div class="d-flex w-100">
-                    <span class="item-title flex-grow-1">
+                    <span class="item-title flex-grow-1" tabindex="0">
                         {{item.game.title}}
                         <a class="remove-item-link" href="#" (click)="handleRemoveItem($event, item.id)"
-                            [attr.aria-label]="'Remove' + item.game.title + 'from cart'" tabindex="0" role="button">
+                            [attr.aria-label]="'Remove' + item.game.title + 'from cart'" role="button">
                             Remove
                         </a>
                     </span>

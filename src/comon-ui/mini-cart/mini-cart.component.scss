@@ -134,6 +134,8 @@
     }
 
     .cart-item {
+
+        &:focus-within,
         &:hover {
             .remove-item-link {
                 display: flex;
