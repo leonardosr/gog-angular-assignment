@@ -91,14 +91,14 @@ describe('AppStore', () => {
 
     describe('library', () => {
         it('should set library on setLibrary', () => {
-            const items: ILibraryItem[] = [{ id: '1', game: { id: 'g1', title: 'Game', thumbnail: '', price: 10, discount: null } }];
+            const items: ILibraryItem[] = [{ id: '1', game: { id: '1', title: 'Game', thumbnail: '', price: 10, discount: null } }];
             store['setLibrary'](items);
             expect(store.state().libraryItems.items).toEqual(items);
             expect(store.state().libraryItems.isLoading).toBeFalse();
         });
 
         it('should load user library via loadLibrary effect', (done) => {
-            const items: ILibraryItem[] = [{ id: '1', game: { id: 'g1', title: 'Game', thumbnail: '', price: 10, discount: null } }];
+            const items: ILibraryItem[] = [{ id: '1', game: { id: '1', title: 'Game', thumbnail: '', price: 10, discount: null } }];
             libraryService.getAll.and.returnValue(of(items));
             store.loadLibrary(of(void 0));
             store.select(s => s.libraryItems.items).subscribe(val => {
