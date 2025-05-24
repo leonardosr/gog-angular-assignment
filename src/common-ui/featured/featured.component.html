@@ -9,10 +9,10 @@
         @if(featuredContent()) {
         <img class="featured-image" [ngSrc]="featuredContent()!.featuredImage" [alt]="featuredContentTitle()"
             [attr.aria-label]="featuredContentTitle()" priority fill />
-        }
         <button class="btn btn-lg btn-success secret-btn" aria-label="Secret action" tabindex="0"
             (click)="handleAddToCart()" [disabled]="isActionDisabled()">
             A secret button that you should totally implement
         </button>
+        }
     </div>
 </div>
