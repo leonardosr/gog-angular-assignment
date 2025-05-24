@@ -32,7 +32,6 @@ export class CartService extends ApiService<ICart> {
           id: generateNextCartItemId(cart.items),
           game
         };
-        console.log(newCartItem);
         return this.httpClient.patch<void>(`${this.apiEndpoint}/${id}`, {
           items: [...cart.items.filter((item: ICartItem) => item.game.id !== gameId), newCartItem]
         }).pipe(
