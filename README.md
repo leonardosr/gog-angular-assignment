@@ -3,6 +3,17 @@
 This is a sample shopping cart application built with Angular (v18) as part of a Senior Front End Developer assignment for GoG.  
 It demonstrates modern Angular features, accessibility, state management, and a modular component structure.
 
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Notes](#notes)
+- [License](#license)
+- [Author](#author)
+
 ## Features
 
 - Modern Angular 18 with standalone components and signals
@@ -43,9 +54,10 @@ It demonstrates modern Angular features, accessibility, state management, and a 
 
 ### 1. Start the Mock API with `json-server`
 
-The app uses [json-server](https://github.com/typicode/json-server) to mock backend API calls.  
-A sample `_db.json` file is provided in the project root.
-Create a db.json and past it's data to setup your initial mock data
+- The app uses [json-server](https://github.com/typicode/json-server) to mock backend API calls.  
+- A sample `_db.json` file is provided in the project root as a template.  
+- Copy or rename it to `db.json` before starting the server.  
+- If you need to restore the initial data, use `db_bkp.json`.
 
 ```sh
 json-server --watch db.json --port 3000
@@ -88,11 +100,13 @@ src/
   app/
     app.component.ts
     app.component.store.ts
-  comon-ui/
+  common-ui/
     catalog/
     featured/
     mini-cart/
     navbar/
+  constants/
+  interceptors/
   interfaces/
   pipes/
   services/
@@ -118,11 +132,11 @@ src/
 
 ## License
 
-This project is for assignment/demo purposes only.
+- This project is for assignment/demo purposes only.
 
 ---
 
 ## Author
 
-Leonardo Salomão dos Reis
-leo.salomao.reis@gmail.com
+- Leonardo Salomão dos Reis
+- leo.salomao.reis@gmail.com
