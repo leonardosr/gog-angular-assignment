@@ -30,7 +30,7 @@
     },
     {
       "id": "5",
-      "title": "Assassin’s creed: Director’s Cut",
+      "title": "Assassins creed: Directors Cut",
       "thumbnail": "assets/_remote-assets/game5.webp",
       "discount": 0,
       "price": 9.99
@@ -38,7 +38,7 @@
     {
       "id": "6",
       "title": "The Witcher: Adventure Game",
-      "thumbnail": "assets/_remote-assets/game3.webp",
+      "thumbnail": "assets/_remote-assets/game6.webp",
       "discount": null,
       "price": 19.99
     }
@@ -63,7 +63,7 @@
           "id": "0",
           "game": {
             "id": "5",
-            "title": "Assassin’s creed: Director’s Cut",
+            "title": "Assassin's creed: Director's Cut",
             "thumbnail": "assets/_remote-assets/game5.webp",
             "discount": 0,
             "price": 9.99
@@ -89,7 +89,7 @@
       "featuredGame": {
         "id": "6",
         "title": "The Witcher: Adventure Game",
-        "thumbnail": "assets/_remote-assets/game3.webp",
+        "thumbnail": "assets/_remote-assets/game6.webp",
         "discount": null,
         "price": 19.99
       }
