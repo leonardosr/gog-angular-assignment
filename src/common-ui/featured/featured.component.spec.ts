@@ -3,6 +3,7 @@ import { FeaturedComponent } from './featured.component';
 import { By } from '@angular/platform-browser';
 
 describe('FeaturedComponent', () => {
+  let component: FeaturedComponent;
   let fixture: ComponentFixture<FeaturedComponent>;
 
   beforeEach(() => {
@@ -10,6 +11,7 @@ describe('FeaturedComponent', () => {
       imports: [FeaturedComponent]
     });
     fixture = TestBed.createComponent(FeaturedComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -43,5 +45,27 @@ describe('FeaturedComponent', () => {
     expect(secretBtn).toBeTruthy();
     const style = getComputedStyle(secretBtn);
     expect(style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0').toBeTrue();
+  });
+
+  it('should disable the secret button when isActionDisabled is true', () => {
+    fixture.componentRef.setInput('isActionDisabled', true);
+    fixture.detectChanges();
+    const btn = fixture.debugElement.query(By.css('.secret-btn')).nativeElement;
+    expect(btn.disabled).toBeTrue();
+  });
+
+  it('should emit addToCart with the featured game id when button is clicked', () => {
+    fixture.componentRef.setInput('isLoading', false);
+    fixture.componentRef.setInput('featuredContent', {
+      featuredImage: 'test.jpg',
+      featuredGame: { id: '1', title: 'Test Game', thumbnail: 'test.jpg', price: 10, discount: null }
+    });
+    spyOn(component, 'handleAddToCart').and.callThrough();
+    spyOn(component.addToCart, 'emit');
+    fixture.detectChanges();
+    const btn = fixture.debugElement.query(By.css('button'));
+    btn.nativeElement.click();
+    expect(component.handleAddToCart).toHaveBeenCalled();
+    expect(component.addToCart.emit).toHaveBeenCalledWith('1');
   });
 });

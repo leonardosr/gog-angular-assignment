@@ -31,8 +31,8 @@ describe('MiniCartComponent', () => {
 
   it('should compute cart total correctly', () => {
     const cartItems: ICartItem[] = [
-      { id: '1', game: { id: 'g1', title: 'Game 1', thumbnail: null, price: 10, discount: null } },
-      { id: '2', game: { id: 'g2', title: 'Game 2', thumbnail: null, price: 20, discount: 50 } }
+      { id: '1', game: { id: '1', title: 'Game 1', thumbnail: null, price: 10, discount: null } },
+      { id: '2', game: { id: '2', title: 'Game 2', thumbnail: null, price: 20, discount: 50 } }
     ];
     fixture.componentRef.setInput('cartItems', cartItems);
     expect(component.cartTotal()).toBe(20);

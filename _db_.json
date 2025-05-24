@@ -34,6 +34,13 @@
       "thumbnail": "assets/_remote-assets/game5.webp",
       "discount": 0,
       "price": 9.99
+    },
+    {
+      "id": "6",
+      "title": "The Witcher: Adventure Game",
+      "thumbnail": "assets/_remote-assets/game3.webp",
+      "discount": null,
+      "price": 19.99
     }
   ],
   "library": [
@@ -78,7 +85,14 @@
   "content": [
     {
       "id": "1",
-      "featuredImage": "assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.webp"
+      "featuredImage": "assets/_remote-assets/f85ecadb56c7f5270f50bd2a8e40ca0e4febb7cd.webp",
+      "featuredGame": {
+        "id": "6",
+        "title": "The Witcher: Adventure Game",
+        "thumbnail": "assets/_remote-assets/game3.webp",
+        "discount": null,
+        "price": 19.99
+      }
     }
   ]
 }

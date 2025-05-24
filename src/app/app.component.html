@@ -4,7 +4,8 @@
 </app-navbar>
 <div class="container main-container">
   <app-featured class="d-flex" featuredContentTitle="Game of the week" [featuredContent]="featuredContent()"
-    [isLoading]="isFetauredContentLoading()"></app-featured>
+    [isLoading]="isFetauredContentLoading()" (addToCart)="handleAddToCart($event)"
+    [isActionDisabled]="isFeaturedGameActionDisabled()"></app-featured>
   <app-catalog [items]="catalogItems()" [isLoading]="isGameListLoading()"
     (addToCart)="handleAddToCart($event)"></app-catalog>
 </div>

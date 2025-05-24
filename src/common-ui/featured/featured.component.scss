@@ -37,6 +37,13 @@
         z-index: 1000;
         top: 50%;
         transform: translateY(-50%);
+        opacity: 0;
+        transition: opacity 0.2s;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
     }
 }
 

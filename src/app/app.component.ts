@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavbarComponent } from '../common-ui/navbar/navbar.component';
 import { FeaturedComponent } from '../common-ui/featured/featured.component';
@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
   public readonly cartItems = toSignal(this.appStore.cartItems$, { initialValue: [] });
   public readonly isGameListLoading = toSignal(this.appStore.isGameListLoading$, { initialValue: initialState.gameList.isLoading });
   public readonly isCartLoading = toSignal(this.appStore.isGameListLoading$, { initialValue: initialState.cart.isLoading });
-  public readonly isFetauredContentLoading = toSignal(this.appStore.isGameListLoading$, { initialValue: initialState.gameList.isLoading });
+  public readonly isFetauredContentLoading = toSignal(this.appStore.isFetauredContentLoading$, { initialValue: initialState.gameList.isLoading });
+  public readonly isFeaturedGameActionDisabled = toSignal(this.appStore.isFeaturedGameActionDisabled$, { initialValue: false });
   constructor(public readonly appStore: AppStore) {
 
   }

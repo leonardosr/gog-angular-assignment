@@ -12,6 +12,7 @@ import { LibraryService } from 'src/services/library.service';
 import { CartService } from 'src/services/cart.service';
 import { ContentService } from 'src/services/content.service';
 import { buildCatalogItems } from 'src/utils/catalog-utils';
+import { isFeaturedContentDisabled } from 'src/utils/featured-content-utils';
 
 export interface AppState {
     featuredContent: {
@@ -65,14 +66,24 @@ export class AppStore extends ComponentStore<AppState> {
 
     // Combines game, cart, and library state to produce catalog items with isInCart/isInLibrary flags.
     // Returns a placeholder list while loading for the first time.
-    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems, pendingCartItems }) => {
+    readonly catalogItems$: Observable<(ICatalogItem | null)[]> = this.select(({ gameList, cart, libraryItems, pendingCartItems, featuredContent }) => {
         if (gameList.isLoading) return PLACEHOLDER_CATALOG_LIST;
-        return buildCatalogItems(gameList.games, cart.cartData, libraryItems.items, pendingCartItems);
+        const renderedGames = gameList.games.filter((game) => game.id !== featuredContent.content?.featuredGame.id);
+        return buildCatalogItems(renderedGames, cart.cartData, libraryItems.items, pendingCartItems);
     });
 
     readonly cartItems$: Observable<ICartItem[]> = this.select(state => state.cart?.cartData?.items ?? []);
-
     readonly featuredContent$: Observable<IContent | null> = this.select(state => state.featuredContent.content);
+    readonly isFeaturedGameActionDisabled$ = this.select(({ featuredContent, libraryItems, pendingCartItems, cart }) => {
+        isFeaturedContentDisabled(featuredContent?.content, libraryItems.items, cart.cartData, pendingCartItems);
+        const featuredGameId = featuredContent.content?.featuredGame?.id;
+        if (!featuredGameId) return false;
+        const inLibrary = libraryItems.items.some(item => item.game.id === featuredGameId);
+        const inCart = cart.cartData?.items.some(item => item.game.id === featuredGameId) ?? false;
+        const isPEnding = pendingCartItems.has(featuredGameId)
+        return inLibrary || inCart || isPEnding;
+    });
+
     readonly isGameListLoading$: Observable<boolean> = this.select(state => state.gameList.isLoading);
     readonly isFetauredContentLoading$: Observable<boolean> = this.select(state => state.featuredContent.isLoading);
 

@@ -50,6 +50,34 @@ describe('AppStore', () => {
             });
         });
 
+        it('should select the game present on the featured content', (done) => {
+            const featuredGame = { id: '1', title: 'Test', thumbnail: '', price: 10, discount: null };
+            const content: IContent = {
+                featuredImage: '',
+                featuredGame
+            };
+            const games: IGame[] = [
+                { id: '1', title: 'Test', thumbnail: '', price: 10, discount: null },
+                { id: '2', title: 'Test 2', thumbnail: '', price: 10, discount: null },
+                { id: '3', title: 'Test 3', thumbnail: '', price: 10, discount: null }
+            ];
+            store.patchState({
+                featuredContent: {
+                    content,
+                    isLoading: false
+                }
+            });
+            gameService.getAll.and.returnValue(of(games));
+            store.loadGames(of(void 0));
+            store.catalogItems$.subscribe(val => {
+                if (val.length) {
+                    const loadedGames = val.map((item) => item?.game);
+                    expect(loadedGames).not.toContain(featuredGame);
+                    done();
+                }
+            });
+        });
+
         it('should handle error in loadGames effect', (done) => {
             spyOn(console, 'error');
             gameService.getAll.and.returnValue(throwError(() => new Error('Games error')));
@@ -94,14 +122,14 @@ describe('AppStore', () => {
 
     describe('content', () => {
         it('should set featured content on setFeaturedContent', () => {
-            const content: IContent = { featuredImage: 'test.webp' };
+            const content: IContent = { featuredImage: 'test.webp' } as IContent;
             store['setFeaturedContent'](content);
             expect(store.state().featuredContent.content).toEqual(content);
             expect(store.state().featuredContent.isLoading).toBeFalse();
         });
 
         it('should load featured content via loadFeaturedContent effect', (done) => {
-            const content: IContent = { featuredImage: 'test.webp' };
+            const content: IContent = { featuredImage: 'test.webp' } as IContent;
             contentService.getById.and.returnValue(of(content));
             store.loadFeaturedContent(of(void 0));
             store.select(s => s.featuredContent.content).subscribe(val => {
