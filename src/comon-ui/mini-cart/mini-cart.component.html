@@ -1,11 +1,11 @@
-<a class="cart-link" href="#" (click)="toggleCart($event)" (keydown.enter)="toggleCart($event)" aria-label="Open cart"
+<button class="cart-link" (click)="toggleCart($event)" (keydown.enter)="toggleCart($event)" aria-label="Open cart"
     aria-haspopup="dialog" [attr.aria-expanded]="isOpen()" tabindex="0">
     <div class="cart bg-white d-flex flex-wrap align-content-center justify-content-center placeholder-glow"
         [class.placeholder]="isLoading()" role="button" [attr.aria-label]="'Cart with' + cartItems().length + 'items'">
         <img class="cart-icon flash" src="assets/images/icons/cart.svg" alt="Cart icon" />
         <span class="cart-qty" aria-live="polite">{{cartItems().length}}</span>
     </div>
-</a>
+</button>
 <div class="cart-panel bg-white flex-column" [class.d-flex]="isOpen()" [class.d-none]="!isOpen()" role="dialog"
     aria-modal="true" aria-label="Shopping cart" tabindex="-1">
     @if(cartItems().length > 0) {
@@ -21,13 +21,13 @@
             CLEAR CART
         </button>
     </div>
-    <div class="cart-items d-flex flex-column" role="list" aria-labelledby="cart-summary">
+    <ul class="cart-list d-flex flex-column" aria-labelledby="cart-summary">
         @for(item of cartItems(); track item.id) {
-        <div class="cart-item d-flex align-items-center" role="listitem">
+        <li class="cart-item d-flex align-items-center">
             @if(item.game.thumbnail) {
             <div class="item-thumbnail">
                 <img [ngSrc]="item.game.thumbnail" [alt]="item.game.title + ' cover'"
-                    [attr.aria-label]="item.game.title + ' cover'" [attr.title]="item.game.title" role="img" fill />
+                    [attr.aria-label]="item.game.title + ' cover'" [attr.title]="item.game.title" fill />
             </div>
             }
             <span class="d-flex item-info flex-column flex-grow-1">
@@ -44,9 +44,9 @@
                     </span>
                 </div>
             </span>
-        </div>
+        </li>
         }
-    </div>
+    </ul>
     } @else {
     <div class="empty-cart d-flex align-content-center justify-content-center flex-wrap flex-column" aria-live="polite">
         <img class="cart-icon align-self-center mb-2" src="assets/images/icons/cart.svg" alt="Empty cart" />

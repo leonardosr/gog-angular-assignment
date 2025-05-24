@@ -2,8 +2,7 @@
     <a class="game-link" href="#">
         <div class="card-header" [class.placeholder]="isLoading()">
             @if(itemThumbail()) {
-            <img class="item-thumbnail" [ngSrc]="itemThumbail()!" [alt]="item()?.game?.title || 'Game cover'" role="img"
-                fill>
+            <img class="item-thumbnail" [ngSrc]="itemThumbail()!" [alt]="item()?.game?.title || 'Game cover'" fill>
             }
         </div>
         <div class="card-body">
@@ -15,7 +14,7 @@
     <div class="card-footer d-flex justify-content-end">
         @if(!item()?.isInCart && !item()?.isInLibrary) {
         @if(item()?.game?.discount && item()!.game!.discount! > 0) {
-        <span class="badge badge-sm text-bg-success me-1" aria-label="Discount">
+        <span class="badge badge-sm text-bg-success me-1">
             {{item()?.game?.discount | discount }}
         </span>
         }
@@ -28,12 +27,12 @@
         }
         } @else {
         @if(item()?.isInCart) {
-        <span class="badge badge-sm badge-outline-dark fadein-badge" aria-label="In Cart">
+        <span class="badge badge-sm badge-outline-dark fadein-badge">
             In Cart
         </span>
         }
         @if(item()?.isInLibrary) {
-        <span class="badge badge-sm badge-outline-gray" aria-label="On Library">
+        <span class="badge badge-sm badge-outline-gray">
             Owned
         </span>
         }

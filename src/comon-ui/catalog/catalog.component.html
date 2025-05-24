@@ -1,6 +1,8 @@
-<div class="d-flex flex-wrap">
+<ul class="catalog d-flex flex-wrap">
     @for (item of items(); track $index) {
-    <app-catalog-item class="catalog-item d-fkex mb-2" [item]="item" [isLoading]="isLoading()"
-        (addToCart)="addToCart.emit($event)"></app-catalog-item>
+    <li class="catalog-item">
+        <app-catalog-item class="mb-2" [item]="item" [isLoading]="isLoading()"
+            (addToCart)="addToCart.emit($event)"></app-catalog-item>
+    </li>
     }
-</div>
+</ul>

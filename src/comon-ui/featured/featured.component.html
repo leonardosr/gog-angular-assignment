@@ -1,13 +1,13 @@
 <div class="featured-content-wrapper placeholder-glow w-100">
     <div class="featured-content-header d-flex my-2">
-        <h2 class="title" tabindex="0" [attr.aria-label]="'Featured: ' + featuredContentTitle()">
+        <h2 class="title">
             {{featuredContentTitle()}}
         </h2>
     </div>
     <div class="featured-content d-flex flex-wrap justify-content-center align-content-center"
         [class.placeholder]="isLoading()">
         @if(featuredContent()) {
-        <img class="featured-image" [ngSrc]="featuredContent()!.featuredImage" [alt]="featuredContentTitle()" role="img"
+        <img class="featured-image" [ngSrc]="featuredContent()!.featuredImage" [alt]="featuredContentTitle()"
             [attr.aria-label]="featuredContentTitle()" fill />
         }
         <button class="btn btn-lg btn-success secret-btn opacity-0" aria-label="Secret action" tabindex="0">

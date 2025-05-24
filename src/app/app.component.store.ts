@@ -140,7 +140,7 @@ export class AppStore extends ComponentStore<AppState> {
             }),
             catchError(err => {
                 //Using console.error to simplify the error handling. 
-                //In a real app it sohuld be done using a toast component
+                //In a real app it sohuld be done using a toast component.
                 console.error('[AppStore] loadGames effect failed:', err);
                 return EMPTY;
             })

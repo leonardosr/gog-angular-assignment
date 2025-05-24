@@ -15,7 +15,7 @@ import { calculateCartTotal } from 'src/utils/price-utils';
 
 })
 export class MiniCartComponent {
-  // Close the cart on ESC key
+  // Close the cart on ESC key.
   @HostListener('document:keydown.escape', ['$event'])
   onEscKey(event: KeyboardEvent) {
     if (this.isOpen()) {
