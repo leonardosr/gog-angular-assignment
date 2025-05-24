@@ -8,6 +8,13 @@ import { IGame } from 'src/interfaces/game.interface';
 
 const API_ENDPOINT = API_URLS.cart;
 
+export function generateNextCartItemId(items: ICartItem[]): string {
+  if (!items.length) return "0";
+  const maxId = Math.max(...items.map(item => parseInt(item.id, 10) || 0));
+  return (maxId + 1).toString();
+}
+
+
 @Injectable()
 export class CartService extends ApiService<ICart> {
   constructor(httpClient: HttpClient) {
@@ -22,9 +29,10 @@ export class CartService extends ApiService<ICart> {
     }).pipe(
       switchMap(({ cart, game }) => {
         const newCartItem = {
-          id: cart.items.length.toString(),
+          id: generateNextCartItemId(cart.items),
           game
         };
+        console.log(newCartItem);
         return this.httpClient.patch<void>(`${this.apiEndpoint}/${id}`, {
           items: [...cart.items.filter((item: ICartItem) => item.game.id !== gameId), newCartItem]
         }).pipe(
