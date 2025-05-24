@@ -2,7 +2,7 @@
   "games": [
     {
       "id": "1",
-      "title": "Oddworld: Stranger’s Wrath",
+      "title": "Oddworld: Stranger's Wrath",
       "thumbnail": "assets/_remote-assets/game1.webp",
       "discount": 50,
       "price": 9.99
