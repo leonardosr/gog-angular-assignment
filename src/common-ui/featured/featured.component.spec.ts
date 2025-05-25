@@ -41,6 +41,13 @@ describe('FeaturedComponent', () => {
   });
 
   it('should render the secret button but keep it invisible', () => {
+    fixture.componentRef.setInput('isLoading', false);
+    fixture.componentRef.setInput('featuredContent', {
+      featuredImage: 'test.jpg',
+      featuredGame: { id: '1', title: 'Test Game', thumbnail: 'test.jpg', price: 10, discount: null }
+    });
+    fixture.componentRef.setInput('isActionDisabled', true);
+    fixture.detectChanges();
     const secretBtn = fixture.nativeElement.querySelector('.secret-btn');
     expect(secretBtn).toBeTruthy();
     const style = getComputedStyle(secretBtn);
@@ -48,6 +55,11 @@ describe('FeaturedComponent', () => {
   });
 
   it('should disable the secret button when isActionDisabled is true', () => {
+    fixture.componentRef.setInput('isLoading', false);
+    fixture.componentRef.setInput('featuredContent', {
+      featuredImage: 'test.jpg',
+      featuredGame: { id: '1', title: 'Test Game', thumbnail: 'test.jpg', price: 10, discount: null }
+    });
     fixture.componentRef.setInput('isActionDisabled', true);
     fixture.detectChanges();
     const btn = fixture.debugElement.query(By.css('.secret-btn')).nativeElement;
