@@ -2,6 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MiniCartComponent } from './mini-cart.component';
 import { ICartItem } from 'src/interfaces/cart-item.interface';
 
+const TEST_GAME_1 = { id: '1', title: 'Game 1', thumbnail: null, price: 10, discount: null };
+const TEST_GAME_2 = { id: '2', title: 'Game 2', thumbnail: null, price: 20, discount: 50 };
+const TEST_CART_ITEM_1: ICartItem = { id: '1', game: TEST_GAME_1 };
+const TEST_CART_ITEM_2: ICartItem = { id: '2', game: TEST_GAME_2 };
+const TEST_CART_ITEMS: ICartItem[] = [TEST_CART_ITEM_1, TEST_CART_ITEM_2];
+
 describe('MiniCartComponent', () => {
   let component: MiniCartComponent;
   let fixture: ComponentFixture<MiniCartComponent>;
@@ -30,11 +36,7 @@ describe('MiniCartComponent', () => {
   });
 
   it('should compute cart total correctly', () => {
-    const cartItems: ICartItem[] = [
-      { id: '1', game: { id: '1', title: 'Game 1', thumbnail: null, price: 10, discount: null } },
-      { id: '2', game: { id: '2', title: 'Game 2', thumbnail: null, price: 20, discount: 50 } }
-    ];
-    fixture.componentRef.setInput('cartItems', cartItems);
+    fixture.componentRef.setInput('cartItems', TEST_CART_ITEMS);
     expect(component.cartTotal()).toBe(20);
   });
 
