@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavbarComponent } from '../common-ui/navbar/navbar.component';
 import { FeaturedComponent } from '../common-ui/featured/featured.component';

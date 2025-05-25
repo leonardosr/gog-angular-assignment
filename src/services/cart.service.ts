@@ -9,7 +9,7 @@ import { IGame } from 'src/interfaces/game.interface';
 const API_ENDPOINT = API_URLS.cart;
 
 export function generateNextCartItemId(items: ICartItem[]): string {
-  if (!items.length) return "0";
+  if (!items.length) return '0';
   const maxId = Math.max(...items.map(item => parseInt(item.id, 10) || 0));
   return (maxId + 1).toString();
 }

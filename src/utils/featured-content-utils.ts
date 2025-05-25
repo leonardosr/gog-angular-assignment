@@ -1,6 +1,6 @@
-import { ICart } from "src/interfaces/cart-item.interface";
-import { IContent } from "src/interfaces/featured-content.interface";
-import { ILibraryItem } from "src/interfaces/library-item.interface";
+import { ICart } from 'src/interfaces/cart-item.interface';
+import { IContent } from 'src/interfaces/featured-content.interface';
+import { ILibraryItem } from 'src/interfaces/library-item.interface';
 
 export function isFeaturedContentDisabled(content: IContent | null, libraryItems: ILibraryItem[], cart: ICart | null, pendingCartItems: Set<string>) {
     const featuredGameId = content?.featuredGame?.id;
