@@ -61,7 +61,6 @@ It demonstrates modern Angular features, accessibility, state management, and a 
 - The app uses [json-server](https://github.com/typicode/json-server) to mock backend API calls.  
 - A sample `_db.json` file is provided in the project root as a template.  
 - Copy or rename it to `db.json` before starting the server.  
-- If you need to restore the initial data, use `db_bkp.json`.
 
 ```sh
 json-server --watch db.json --port 3000
