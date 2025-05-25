@@ -38,8 +38,8 @@ It demonstrates modern Angular features, accessibility, state management, and a 
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/leonardosr/gog-cart-assignment.git
-    cd gog-cart-assignment
+    git clone https://github.com/leonardosr/gog-angular-assignment.git
+    cd gog-angular-assignment
     ```
 
 2. **Install dependencies:**
