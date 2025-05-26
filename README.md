@@ -25,6 +25,7 @@ It demonstrates modern Angular features, accessibility, state management, and a 
 - Modular state management (@ngrx/component-store)
 - Mock API with json-server
 - Unit tests for all major logic
+- Accessibility best practices (semantic HTML, ARIA attributes, keyboard navigation)
 
 ## Getting Started
 
